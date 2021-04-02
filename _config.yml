@@ -18,40 +18,52 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Your awesome title
-email: hello@ai-blox.com
-description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: ai-blox
-github_username:  ai-blox
+theme                     : minimal-mistakes-jekyll
+remote_theme              : mmistakes/minimal-mistakes@4.22.0
+minimal_mistakes_skin     : "air"
 
-# Build settings
-remote_theme: mmistakes/minimal-mistakes@4.22.0
-minimal_mistakes_skin: "air"
+# Site Settings
+title                     : "Hardware for edge AI"
+title_separtor            : "-"
+subtitle                  :
+name                      : "AiBlox BV"
+description               : "An amazing website"
+url                       : "https://www.ai-blox.com"
+baseurl                   : "/"
+logo                      : "/main/assets/images/AIBloxLogo@2x.png"
+masthead_title            : "AiBlox BV"
+
+atom_feed:
+  hide                    : true
+
+
+# Social Sharing
+twitter:
+  username                : "ai-blox"
+
+
+# Site Footer
+footer:
+  links:
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://twitter.com/ai-blox"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/ai-blox"
+
+
+
+
 plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-gist
   - jekyll-feed
   - jekyll-include-cache
 
-# Exclude from processing.
-# The following items will not be processed, by default.
-# Any item listed under the `exclude:` key here will be automatically added to
-# the internal "default list".
-#
-# Excluded items can be processed by explicitly listing the directories or
-# their entries' file path in the `include:` list.
-#
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+
+
+# Reading Files
+include:
+  - _pages

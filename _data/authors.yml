@@ -1,0 +1,10 @@
+# Authors
+
+HansStevens:
+  name            : "Hans Stevens"
+  bio             : "Blablabla"
+  avatar          : /main/assets/images/1x/bio-hans.png
+  links:
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope-square"
+      url: "mailto:hans@ai-blox.com"
