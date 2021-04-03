@@ -37,10 +37,13 @@ breadcrumbs               : true
 atom_feed:
   hide                    : true
 
-
 # Social Sharing
 twitter:
   username                : "ai-blox"
+
+maps:
+  google:
+    api_key: "AIzaSyCbwUAmHk3-JQYUYT8hMk1PdQyUsWuI9H0"
 
 
 # Site Footer
@@ -62,6 +65,7 @@ plugins:
   - jekyll-gist
   - jekyll-feed
   - jekyll-include-cache
+  - jekyll-maps
 
 
 
