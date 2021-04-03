@@ -29,9 +29,10 @@ subtitle                  :
 name                      : "AiBlox BV"
 description               : "An amazing website"
 url                       : "https://www.ai-blox.com"
-baseurl                   : "/"
-logo                      : "/main/assets/images/AIBloxLogo@2x.png"
+baseurl                   : ""
+logo                      : "/assets/images/AIBloxLogo@2x.png"
 masthead_title            : "AiBlox BV"
+breadcrumbs               : true
 
 atom_feed:
   hide                    : true

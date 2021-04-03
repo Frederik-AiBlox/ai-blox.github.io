@@ -1,6 +1,6 @@
 ---
 title: "Blog"
-permalink: /main/blog/
-layout: posts
+permalink: /blog/
+layout: myposts
 author_profile: true
 ---
