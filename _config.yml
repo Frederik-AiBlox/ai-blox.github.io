@@ -18,9 +18,8 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-theme                     : minimal-mistakes-jekyll
-remote_theme              : mmistakes/minimal-mistakes@4.22.0
-minimal_mistakes_skin     : "air"
+remote_theme              : pmarsceill/just-the-docs
+color_scheme              : "dark"
 
 # Site Settings
 title                     : "Hardware for edge AI"
