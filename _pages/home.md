@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Customization
+title: MODULE-X
 nav_order: 1
 ---
 
