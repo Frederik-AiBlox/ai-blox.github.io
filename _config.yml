@@ -26,49 +26,10 @@ search_enabled            : false
 title                     : "Hardware for edge AI"
 title_separtor            : "-"
 subtitle                  :
-name                      : "AiBlox BV"
-description               : "An amazing website"
+name                      : "AI-BLOX BV"
+description               : "docs page"
 url                       : "https://docs.ai-blox.com"
 baseurl                   : ""
 logo                      : "/assets/images/AIBloxLogo@2x.png"
 masthead_title            : "AiBlox BV"
 breadcrumbs               : true
-
-atom_feed:
-  hide                    : true
-
-# Social Sharing
-twitter:
-  username                : "ai-blox"
-
-maps:
-  google:
-    api_key: "AIzaSyCbwUAmHk3-JQYUYT8hMk1PdQyUsWuI9H0"
-
-
-# Site Footer
-footer:
-  links:
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/ai-blox"
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/ai-blox"
-
-
-
-
-plugins:
-  - jekyll-paginate
-  - jekyll-sitemap
-  - jekyll-gist
-  - jekyll-feed
-  - jekyll-include-cache
-  - jekyll-maps
-
-
-
-# Reading Files
-include:
-  - _pages
