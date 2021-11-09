@@ -18,7 +18,7 @@ The MODULE-X device has 3 extension connectors. 2 for the interface slot and one
 </style>
 
 | Jetson    || Interface Connector A                     |||| Jetson           ||
-| Name       | Pin# | Name       | Pin# | Pin# | Name       | Pin# | Name       |
+| Name       | Pin# | Name       | Pin#       || Name       | Pin# | Name       |
 |:----------:|:----:|:----------:|:----:|:----:|:----------:|:----:|:----------:|
 |            |      | GND        | 1    | 2    | GND        |      |            |
 | CSI0_CLK_N | 10   | CSI0_CLK_N | 3    | 4    | CSI2_CLK_N | 28   | CSI2_CLK_N |

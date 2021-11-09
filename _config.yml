@@ -31,9 +31,11 @@ name                      : "AI-BLOX BV"
 description               : "docs page"
 url                       : "https://docs.ai-blox.com"
 baseurl                   : ""
-logo                      : "/assets/images/AIBloxLogo@2x.png"
+logo                      : "/assets/images/AIBlox horizontal@0.5x.png"
 masthead_title            : "AiBlox BV"
 breadcrumbs               : true
+
+color_scheme              : aiblox
 
 plugins:
   - jekyll-spaceship
