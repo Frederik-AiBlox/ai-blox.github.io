@@ -1,0 +1,16 @@
+
+
+tbody {
+  tr:nth-child(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  td {
+    background-color: transparent;
+  }
+}
+
+th, td {
+  min-width: auto !important;
+}
+
