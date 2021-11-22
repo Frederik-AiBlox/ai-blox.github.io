@@ -3,6 +3,7 @@ layout: default
 title: 6-Channel MIPI interface
 parent: Interface Modules
 nav_order: 2
+has_children: true
 ---
 
 # 6-Channel MIPI interface
@@ -22,6 +23,12 @@ The module has also a debug interface which makes the module ideal as a developm
 The debug interface consist out of an USB connection to flash the module and a serial port which allows you to monitor the boot terminal output.
 To flash the module, you need to press the recovery button while turning the power on. 
 The recovery button is also available on the module.
+
+## Camera support
+
+Currently the module supports the IMX219 camera, [here](/pages/interface-modules/6-channel-mipi/imx219.html) you can find out how you can use the camera on the MODULE-X platform.
+
+If you need an other camera, please contact us at [support](mailto:support@ai-blox.com?subject=[Docs]%20Camera%20driver%20request) and we are happy check if we can provide a driver.
 
 ## Block diagram
 
@@ -44,9 +51,15 @@ Each camera has it's own 2-lane MIPI channel.
 
 ## Connections
 
-### Raspberry Pi camera connector 
+<p align="center">
+<img src="/assets/images/pages/interface-modules/6-channel-mipi/6%20Channel%20MIPI%20interface%20connector%20layout.svg" width="300">
+</p>
+
+### CAM 0 to CAM 5 port 
 
 The connector type used on the module is the [1-1734248-5](https://www.te.com/usa-en/product-1-1734248-5.html?te_campaign=oct_glo_manufacturer&elqCampaignId=26136&te_bu=Cor&te_type=other) connector from TE Connectivity.
+
+The connector is pin compatible with the Raspbery Pi camera connector. 
 
 | Pin# | Pin Name  | Description               |
 |:-----|:----------|:--------------------------|
@@ -66,9 +79,9 @@ The connector type used on the module is the [1-1734248-5](https://www.te.com/us
 | 14   | GND       | I2C SDA                   |
 | 15   | GND       | 3.3V Power                |
 
-### Debug interface
+### Debug Port
 
-The debug interface is compatible with the [TTL-232R-3V3](https://ftdichip.com/products/ttl-232r-3v3/) cable from FTDI-chip.
+The debug port is compatible with the [TTL-232R-3V3](https://ftdichip.com/products/ttl-232r-3v3/) cable from FTDI-chip.
 Pin 1 is the black cable on the connector.
 
 | Pin# | Pin Name  | Description               |
