@@ -86,9 +86,10 @@ This chapter shows you step by step how to start your development on the MODULE-
 
 ## Camera Test
 
-* Connect 1 or more IMX219 cameras to the MODULE-X. The table below shows which CAM ports are available or not depending of the Jetson Module:
+* Connect 1 or more IMX219 cameras to the MODULE-X. The table below shows which CAM ports are available. This depends of the Jetson Module:
 
 | Ports      | Jetson Nano   | Jetson TX2 NX | Jetson Xavier |
+|^^          |^^ MX1010-x    |^^ MX1020-x    |^^ MX1030-x    |
 |:-----------|:-------------:|:-------------:|:-------------:|
 | CAM0 Port  | /dev/video0   | /dev/video0   | /dev/video0   |
 | CAM1 Port  |               | /dev/video1   | /dev/video1   |
