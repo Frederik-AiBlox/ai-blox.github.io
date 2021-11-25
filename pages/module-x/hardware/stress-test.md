@@ -48,6 +48,13 @@ $ sudo apt-get update
 $ sudo apt-get -y install cuda
 ```
 
+* Build the matrixMul sample app:
+
+```shell
+$ cd /usr/local/cuda/samples/0_Simple/matrixMul
+$ sudo make
+```
+
 ## Run test
 
 For getting the maximum performance out of the Jetson Modules, three things need to be done:
