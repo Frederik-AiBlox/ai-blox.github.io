@@ -1,8 +1,10 @@
 ---
 layout: default
 title: Connector pinout
-parent: MODULE-X
+parent: Hardware
+grand_parent: MODULE-X
 nav_order: 2
+has_toc: false
 ---
 
 # Connector pinout
