@@ -21,7 +21,7 @@ In this chapter, we will explain how you can stress the MODULE-X to the limits a
 
 ## Prerequisites
 
-* One of the following modules:
+* You need one of the following modules:
    * [IMX1010-1](https://www.ai-blox.com/shop/10-10-0001-mx1010-1-1), MODULE-X with Jetson Nano
    * [IMX1020-1](https://www.ai-blox.com/shop/10-20-0001-mx1020-1-20), MODULE-X with Jetson TX2 NX
    * [IMX1030-1](https://www.ai-blox.com/shop/10-30-0001-mx1030-1-22), MODULE-X with Jetson Xavier NX
