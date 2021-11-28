@@ -31,21 +31,19 @@ In this chapter, we will explain how you can stress the MODULE-X to the limits a
 * Install the `stress` tool for CPU stressing:
 ```bash
 $ sudo apt-get update
-$ sudo apt-get install stress
+$ sudo apt-get install -y stress
 ```
 
 * Install CUDA necessary to stress the GPU, there are 2 options:
   * through the NVIDIA software SDK
-  * through deb installation package, this procedure is showed below
+  * through deb installation package, this procedure is showed below for JetPack 4.6
 
 ```shell
 $ wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/sbsa/cuda-ubuntu1804.pin
 $ sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
-$ wget https://developer.download.nvidia.com/compute/cuda/11.5.1/local_installers/cuda-repo-ubuntu1804-11-5-local_11.5.1-495.29.05-1_arm64.deb
-$ sudo dpkg -i cuda-repo-ubuntu1804-11-5-local_11.5.1-495.29.05-1_arm64.deb
-$ sudo apt-key add /var/cuda-repo-ubuntu1804-11-5-local/7fa2af80.pub
 $ sudo apt-get update
-$ sudo apt-get -y install cuda
+wget https://repo.download.nvidia.com/jetson/common/pool/main/c/cuda-toolkit-10-2/cuda-toolkit-10-2_10.2.460-1_arm64.deb
+sudo apt install ./cuda-toolkit-10-2_10.2.460-1_arm64.deb
 ```
 
 * Build the matrixMul sample app:
@@ -67,9 +65,10 @@ This allows the system to settle down at the maximum temperature.
 
 Choosing the power mode depends of which module you are testing.
 An overview of the available power modes can be found in the Power Mode section of this page.
+cd
 
 ```bash
-$ sudo /user/sbin/nvpmodel -m <x>
+$ sudo /usr/sbin/nvpmodel -m <x>
 ```
 Where `<x>` is the power mode. The maximum power modes are:
 * Jetson Nano @10W: `nvpmodel -m 0` 
@@ -139,11 +138,26 @@ RAM 1749/7772MB (lfb 377x4MB) SWAP 0/3886MB (cached 0MB) CPU [100%@1420,100%@142
 RAM 1749/7772MB (lfb 377x4MB) SWAP 0/3886MB (cached 0MB) CPU [100%@1420,100%@1420,100%@1420,100%@1420,100%@1420,100%@1420] EMC_FREQ 0% GR3D_FREQ 99% AO@51C GPU@53.5C PMIC@100C AUX@51C CPU@53C thermal@52.35C VDD_IN 14664/13951 VDD_CPU_GPU_CV 10874/10241 VDD_SOC 1444/1412
 ```
 
-![](/assets/images/pages/module-x/hardware/stress-test/XavierNx10W.bmp)
+![](/assets/images/pages/module-x/hardware/stress-test/XavierNx15W.bmp)
 
 Jetson Xavier NX in 20W mode, room temperature 20°C
 
-T.B.D.
+Results:
+* Total power consumption: 19,2W
+* CPU temp.: 55,0°C, max temp.: 90,5°C (delta: 35,5°)
+* GPU temp.: 56,0°C, max temp.: 91,5°C (delta: 35,5°C)
+* AUX temp.: 55,0°C, max temp.: 90,0°C (delta: 40,0°C)
+* Max. heat sink temp.: 43,1°C
+
+The max ambient temp. in this mode is: 55,5°C (20,0°C + 35,5°)
+
+```bash
+RAM 6774/7773MB (lfb 159x4MB) SWAP 608/3887MB (cached 46MB) CPU [100%@1420,100%@1420,100%@1420,100%@1420,100%@1420,100%@1420] EMC_FREQ 0% GR3D_FREQ 99% AO@54.5C GPU@57C PMIC@50C AUX@55C CPU@56C thermal@55.75C
+RAM 6774/7773MB (lfb 159x4MB) SWAP 608/3887MB (cached 46MB) CPU [100%@1420,100%@1420,100%@1420,100%@1420,100%@1420,100%@1420] EMC_FREQ 0% GR3D_FREQ 99% AO@54.5C GPU@56.5C PMIC@50C AUX@54.5C CPU@56C thermal@55.75C
+RAM 6774/7773MB (lfb 159x4MB) SWAP 608/3887MB (cached 46MB) CPU [100%@1420,100%@1420,100%@1420,100%@1420,100%@1420,100%@1420] EMC_FREQ 0% GR3D_FREQ 99% AO@54.5C GPU@56.5C PMIC@50C AUX@55C CPU@56C thermal@55.75C
+```
+
+![](/assets/images/pages/module-x/hardware/stress-test/XavierNx20W.png)
 
 ## Power Mode overview
 
