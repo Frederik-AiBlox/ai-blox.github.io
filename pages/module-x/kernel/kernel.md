@@ -1,8 +1,8 @@
 ---
 layout: default
-title: Kernel overview
+title: Kernel Support
 parent: MODULE-X
-nav_order: 1
+nav_order: 2
 ---
 
 
