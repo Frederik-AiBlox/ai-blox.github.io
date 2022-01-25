@@ -2,185 +2,49 @@
 layout: default
 title: Kernel Support
 parent: MODULE-X
+has_children: true
 nav_order: 3
 ---
 
 
-# JetPack support overview
+# Device tree
 
-## JetPack 4.6
+Each MODULE-X has it's own device tree. The table below shows the root device tree.
 
-### NVIDIA Product Pages
-* [JETPACK SDK 4.6 RELEASE PAGE](https://developer.nvidia.com/jetpack-sdk-46)
-* [Jetson Linux R32.6.1 Release Page](https://developer.nvidia.com/embedded/linux-tegra-r3261)
 
-### AI-BLOX Product Support
 
-| Product  | Jetson     | Supported |
-|----------|------------|-----------|
-| MX1010-1 | Nano       | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.6 Support]) |
-| MX1010-2 | Nano       | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.6 Support]) |
-| MX1020-1 | TX2 NX     | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.6 Support]) |
-| MX1020-2 | TX2 NX     | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.6 Support]) |
-| MX1030-1 | XAVIER NX  | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.6 Support]) |
-| MX1030-2 | XAVIER NX  | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.6 Support]) |
+| Device   | Filename                               | Description                            |
+|----------|----------------------------------------|----------------------------------------|
+| MX1010-1 | tegra210-p3448-0002-MX1010-1-<ver>.dts | MODULE-X, Jetson Nano                  |
+| MX1010-2 | tegra210-p3448-0002-MX1010-2-<ver>.dts | MODULE-X, Jetson Nano, 7" touch screen |
+| MX1020-1 |  | MODULE-X, Jetson TX2 NX |
+| MX1020-2 |  | MODULE-X, Jetson TXZ NX, 7" touch screen |
+| MX1030-1 |  | MODULE-X, Jetson Xavier NX |
+| MX1030-2 |  | MODULE-X, Jetson Xavier NX, 7" touch screen|
 
-## JetPack 4.5.1
-L4T 32.5.1
 
-### NVIDIA Product Pages
 
-### AI-BLOX Product Support
 
-| Product  | Jetson     | Supported |
-|----------|------------|-----------|
-| MX1010-1 | Nano       | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.5.1 Support]) |
-| MX1010-2 | Nano       | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.5.1 Support]) |
-| MX1020-1 | TX2 NX     | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.5.1 Support]) |
-| MX1020-2 | TX2 NX     | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.5.1 Support]) |
-| MX1030-1 | XAVIER NX  | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.5.1 Support]) |
-| MX1030-2 | XAVIER NX  | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.5.1 Support]) |
+# Jetson Linux Toolchain
 
-## JetPack 4.5
-L4T 32.5
+NVIDIA speciffies the Linaro gcc 7.3.1 2018.05 aarch toolchain.
 
-### NVIDIA Product Pages
+## Downloading the Toolchain
 
-### AI-BLOX Product Support
+```shell
+http://releases.linaro.org/components/toolchain/binaries/7.3-2018.05/aarch64-linux-gnu/gcc-linaro-7.3.1-2018.05-x86_64_aarch64-linux-gnu.tar.xz
+```
 
-| Product  | Jetson     | Supported |
-|----------|------------|-----------|
-| MX1010-1 | Nano       | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.5 Support]) |
-| MX1010-2 | Nano       | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.5 Support]) |
-| MX1020-1 | TX2 NX     | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.5 Support]) |
-| MX1020-2 | TX2 NX     | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.5 Support]) |
-| MX1030-1 | XAVIER NX  | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.5 Support]) |
-| MX1030-2 | XAVIER NX  | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.5 Support]) |
+## Extracting the Toolchain
 
-## JetPack 4.4.1
-L4T 32.4.4
+```shell
+$ mkdir $HOME/l4t-gcc
+$ cd $HOME/l4t-gcc
+$ tar xf gcc-linaro-7.3.1-2018.05-x86_64_aarch64-linux-gnu.tar.xz
+```
 
-### NVIDIA Product Pages
+## Setting the CROSS_COMPILE Environment Variable
 
-### AI-BLOX Product Support
-
-| Product  | Jetson     | Supported |
-|----------|------------|-----------|
-| MX1010-1 | Nano       | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4.1 Support]) |
-| MX1010-2 | Nano       | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4.1 Support]) |
-| MX1020-1 | TX2 NX     | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4.1 Support]) |
-| MX1020-2 | TX2 NX     | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4.1 Support]) |
-| MX1030-1 | XAVIER NX  | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4.1 Support]) |
-| MX1030-2 | XAVIER NX  | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4.1 Support]) |
-
-## JetPack 4.4
-L4T 32.4.3
-
-### NVIDIA Product Pages
-
-### AI-BLOX Product Support
-
-| Product  | Jetson     | Supported |
-|----------|------------|-----------|
-| MX1010-1 | Nano       | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4 Support]) |
-| MX1010-2 | Nano       | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4 Support]) |
-| MX1020-1 | TX2 NX     | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4 Support]) |
-| MX1020-2 | TX2 NX     | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4 Support]) |
-| MX1030-1 | XAVIER NX  | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4 Support]) |
-| MX1030-2 | XAVIER NX  | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4 Support]) |
-
-## JetPack 4.4 Developer Preview
-L4T 32.4.2
-
-### NVIDIA Product Pages
-
-### AI-BLOX Product Support
-
-| Product  | Jetson     | Supported |
-|----------|------------|-----------|
-| MX1010-1 | Nano       | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4 Developer Preview Support]) |
-| MX1010-2 | Nano       | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4 Developer Preview Support]) |
-| MX1020-1 | TX2 NX     | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4 Developer Preview Support]) |
-| MX1020-2 | TX2 NX     | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4 Developer Preview Support]) |
-| MX1030-1 | XAVIER NX  | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4 Developer Preview Support]) |
-| MX1030-2 | XAVIER NX  | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4 Developer Preview Support]) |
-
-## JetPack 4.3
-L4T 32.3.1
-
-### NVIDIA Product Pages
-
-### AI-BLOX Product Support
-
-| Product  | Jetson     | Supported |
-|----------|------------|-----------|
-| MX1010-1 | Nano       | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.3 Support]) |
-| MX1010-2 | Nano       | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.3 Support]) |
-| MX1020-1 | TX2 NX     | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.3 Support]) |
-| MX1020-2 | TX2 NX     | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.3 Support]) |
-| MX1030-1 | XAVIER NX  | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.3 Support]) |
-| MX1030-2 | XAVIER NX  | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.3 Support]) |
-
-## JetPack 4.2.3
-L4T 32.2.1
-
-### NVIDIA Product Pages
-
-### AI-BLOX Product Support
-
-| Product  | Jetson     | Supported |
-|----------|------------|-----------|
-| MX1010-1 | Nano       | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.2.3 Support]) |
-| MX1010-2 | Nano       | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.2.3 Support]) |
-| MX1020-1 | TX2 NX     | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.2.3 Support]) |
-| MX1020-2 | TX2 NX     | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.2.3 Support]) |
-| MX1030-1 | XAVIER NX  |  No       |
-| MX1030-2 | XAVIER NX  |  No       |
-
-## JetPack 4.2.2
-L4T 32.2.1
-
-### NVIDIA Product Pages
-
-### AI-BLOX Product Support
-
-| Product  | Jetson     | Supported |
-|----------|------------|-----------|
-| MX1010-1 | Nano       | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.2.2 Support]) |
-| MX1010-2 | Nano       | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.2.2 Support]) |
-| MX1020-1 | TX2 NX     | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.2.2 Support]) |
-| MX1020-2 | TX2 NX     | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.2.2 Support]) |
-| MX1030-1 | XAVIER NX  |  No       |
-| MX1030-2 | XAVIER NX  |  No       |
-
-## JetPack 4.2.1
-L4T 32.2
-
-### NVIDIA Product Pages
-
-### AI-BLOX Product Support
-
-| Product  | Jetson     | Supported |
-|----------|------------|-----------|
-| MX1010-1 | Nano       | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.2.1 Support]) |
-| MX1010-2 | Nano       | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.2.1 Support]) |
-| MX1020-1 | TX2 NX     | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.2.1 Support]) |
-| MX1020-2 | TX2 NX     | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.2.1 Support]) |
-| MX1030-1 | XAVIER NX  | No        |
-| MX1030-2 | XAVIER NX  | No        |
-
-## JetPack 4.2
-L4T 32.1
-
-### NVIDIA Product Pages
-
-### AI-BLOX Product Support
-
-| Product  | Jetson     | Supported |
-|----------|------------|-----------|
-| MX1010-1 | Nano       | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.2 Support]) |
-| MX1010-2 | Nano       | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.2 Support]) |
-| MX1020-1 | TX2 NX     | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.2 Support]) |
-| MX1020-2 | TX2 NX     | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.2 Support]) |
-| MX1030-1 | XAVIER NX  |  No       |
-| MX1030-2 | XAVIER NX  |  No       |
+```shell
+$ export CROSS_COMPILE=$HOME/l4t-gcc/gcc-linaro-7.3.1-2018.05-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-
+```
