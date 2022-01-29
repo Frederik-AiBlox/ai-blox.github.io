@@ -13,4 +13,4 @@ This pages shows the available communication modules.
 
 | Order Code              | Reference  | Description                                          |
 |:-----------------------:|:----------:|:-----------------------------------------------------|
-| [CM-0010](CM-0010.html) | 10.50.0010 | Gigabit ethernet communication module                |
+| [CB-0010](CB-0010.html) | 10.50.0010 | Gigabit ethernet communication module                |
