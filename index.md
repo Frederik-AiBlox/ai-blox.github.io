@@ -11,5 +11,5 @@ permalink: /
 ## Welcome
 
 Welcome to our documentation page of AI-BLOX. 
-Here you will find all documents related to our MODULE-X edge platform.
+Here you will find all documents related to our BLOX edge platform.
 

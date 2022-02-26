@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Getting started
-parent: MODULE-X
+parent: BLOX
 nav_order: 1
 ---
 
@@ -9,17 +9,17 @@ nav_order: 1
 
 ---
 
-This chapter shows you step by step how to start your development on the MODULE-X platform.
+This chapter shows you step by step how to start your development on the BLOX platform.
 
 ## Prerequisites
 
-* MODULE-X device with 6-Channel MIPI interface module and gigabit ethernet Module (Dev KIT)
+* BLOX device with 6-Channel MIPI interface module and gigabit ethernet Module (Dev KIT)
 * System running Ubuntu 18.04 
 * USB Serial to TTL 3V3 cable: [TTL-232R-3V3](https://ftdichip.com/products/ttl-232r-3v3/)
 * Ethernet cable
 
 
-## Connect to the MODULE-X
+## Connect to the BLOX
 
 ![](/assets/images/pages/module-x/getting-started/DevKitLayout.svg)
 
@@ -86,7 +86,7 @@ This chapter shows you step by step how to start your development on the MODULE-
 
 ## Camera Test
 
-* Connect 1 or more IMX219 cameras to the MODULE-X. The table below shows which CAM ports are available. This depends of the Jetson Module:
+* Connect 1 or more IMX219 cameras to the BLOX. The table below shows which CAM ports are available. This depends of the Jetson Module:
 
 | Ports      | Jetson Nano   | Jetson TX2 NX | Jetson Xavier |
 |^^          |^^ MX1010-x    |^^ MX1020-x    |^^ MX1030-x    |

@@ -2,7 +2,7 @@
 layout: default
 title: JetPack Support 
 parent: Kernel Support
-grand_parent: MODULE-X
+grand_parent: BLOX
 nav_order: 1
 ---
 

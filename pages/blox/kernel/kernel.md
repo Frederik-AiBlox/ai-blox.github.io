@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Kernel Support
-parent: MODULE-X
+parent: BLOX
 has_children: true
 nav_order: 3
 ---
@@ -9,7 +9,7 @@ nav_order: 3
 
 # Device tree
 
-Each MODULE-X has it's own device tree. The table below shows the root device tree.
+Each BLOX has it's own device tree. The table below shows the root device tree.
 
 
 
