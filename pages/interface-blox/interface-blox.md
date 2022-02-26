@@ -6,7 +6,7 @@ has_children: true
 has_toc: false
 ---
 
-# Interface Modules
+# Interface Blox
 This pages shows the available interface blox.
 
 ---
