@@ -15,14 +15,12 @@ Each MODULE-X has it's own device tree. The table below shows the root device tr
 
 | Device   | Filename                               | Description                            |
 |----------|----------------------------------------|----------------------------------------|
-| MX1010-1 | tegra210-p3448-0002-MX1010-1-<ver>.dts | MODULE-X, Jetson Nano                  |
-| MX1010-2 | tegra210-p3448-0002-MX1010-2-<ver>.dts | MODULE-X, Jetson Nano, 7" touch screen |
+| MX1010-1 | tegra210-p3448-0002-MX1010-1-***ver***.dts | MODULE-X, Jetson Nano                  |
+| MX1010-2 | tegra210-p3448-0002-MX1010-2-***ver***.dts | MODULE-X, Jetson Nano, 7" touch screen |
 | MX1020-1 |  | MODULE-X, Jetson TX2 NX |
 | MX1020-2 |  | MODULE-X, Jetson TXZ NX, 7" touch screen |
-| MX1030-1 |  | MODULE-X, Jetson Xavier NX |
-| MX1030-2 |  | MODULE-X, Jetson Xavier NX, 7" touch screen|
-
-
+| MX1030-1 | tegra194-p3668-0001-MX1030-1-***ver***.dts | MODULE-X, Jetson Xavier NX |
+| MX1030-2 | tegra194-p3668-0001-MX1030-2-***ver***.dts | MODULE-X, Jetson Xavier NX, 7" touch screen|
 
 
 # Jetson Linux Toolchain
