@@ -2,7 +2,7 @@
 layout: default
 title: Stress test
 parent: Hardware
-grand_parent: MODULE-X
+grand_parent: BLOX
 nav_order: 1
 has_toc: false
 ---

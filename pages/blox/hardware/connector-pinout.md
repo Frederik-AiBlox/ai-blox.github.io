@@ -2,7 +2,7 @@
 layout: default
 title: Connector pinout
 parent: Hardware
-grand_parent: MODULE-X
+grand_parent: BLOX
 nav_order: 2
 has_toc: false
 ---
@@ -111,42 +111,42 @@ The MODULE-X device has 3 extension connectors. 2 for the interface slot and one
 | Name         | Pin# | Name         | Pin#       || Name         | Pin# | Name         |
 |:------------:|:----:|:------------:|:----:|:----:|:------------:|:----:|:------------:|
 |              |      | GND          | 1    | 2    | GND          |      |              |
-| PCIE0_CLK_N  | 160  | PCIE0_CLK_N  | 3    | 4    | PCIE0_CLKREQ | 180  | PCIE0_CLKREQ |
-| PCIE0_CLK_P  | 162  | PCIE0_CLK_P  | 5    | 6    | PCIE0_RST    | 181  | PCIE0_RST    |
-|              |      | GND          | 7    | 8    | PCIE0_WAKE   | 179  | PCIE0_WAKE   |
-| PCIE0_TX0_N  | 134  | PCIE0_TX0_N  | 9    | 10   | GND          |      |              |
-| PCIE0_TX0_P  | 136  | PCIE0_TX0_P  | 11   | 12   | PCIE0_RX0_N  | 131  | PCIE0_RX0_N  |
-|              |      | GND          | 13   | 14   | PCIE0_RX0_P  | 133  | PCIE0_RX0_P  |
-| PCIE0_TX1_N  | 140  | PCIE0_TX1_N  | 15   | 16   | GND          |      |              |
-| PCIE0_TX1_P  | 142  | PCIE0_TX1_P  | 17   | 18   | PCIE0_RX1_N  | 137  | PCIE0_RX1_N  |
-|              |      | GND          | 19   | 20   | PCIE0_RX1_P  | 139  | PCIE0_RX1_P  |
-| PCIE0_TX2_N  | 148  | PCIE0_TX2_N  | 21   | 22   | GND          |      |              |
-| PCIE0_TX2_P  | 150  | PCIE0_TX2_P  | 23   | 24   | PCIE0_RX2_N  | 149  | PCIE0_RX2_N  |
-|              |      | GND          | 25   | 26   | PCIE0_RX2_P  | 151  | PCIE0_RX2_P  |
-| PCIE0_TX3_N  | 154  | PCIE0_TX3_N  | 27   | 28   | GND          |      |              |
-| PCIE0_TX3_P  | 156  | PCIE0_TX3_P  | 29   | 30   | PCIE0_RX3_N  | 155  | PCIE0_RX3_N  |
-|              |      | GND          | 31   | 32   | PCIE0_RX3_P  | 157  | PCIE0_RX3_P  |
-|              |      | GND          | 33   | 34   | GND          |      |              |
-| GBE_MDI0_N   | 184  | GBE_MDI0_N   | 35   | 36   | I2C_SCL      | 232  | I2C_SCL      |
-| GBE_MDI0_P   | 186  | GBE_MDI0_P   | 37   | 38   | I2C_SDA      | 234  | I2C_SDA      |
-|              |      | GND          | 39   | 40   | GND          |      |              |
-| GBE_MDI1_N   | 190  | GBE_MDI1_N   | 41   | 41   | UART1_TXD    | 203  | UART1_TXD    |
-| GBE_MDI1_P   | 192  | GBE_MDI1_P   | 43   | 44   | UART1_RXD    | 205  | UART1_RXD    |
-|              |      | GND          | 45   | 46   | UART1_RTS    | 207  | UART1_RTS    |
-| GBE_MDI2_N   | 196  | GBE_MDI2_N   | 47   | 48   | UART1_CTS    | 209  | UART1_CTS    |
-| GBE_MDI2_P   | 198  | GBE_MDI2_P   | 49   | 50   | GND          |      |              |
-|              |      | GND          | 51   | 52   | USB12_D_N    | Internal USB Hub   ||
-| GBE_MDI3_N   | 202  | GBE_MDI3_N   | 53   | 54   | USB12_D_P    | Internal USB Hub   ||
-| GBE_MDI3_P   | 204  | GBE_MDI3_P   | 55   | 56   | GND          |      |              |
-|              |      | GND          | 57   | 58   | NC           |      |              |
-| GBE_LED_LINK | 188  | GBE_LED_LINK | 59   | 60   | NC           |      |              |
-| GBE_LED_ACT  | 194  | GBE_LED_ACT  | 61   | 62   | NC           |      |              |
-|              |      | GND          | 63   | 64   | GND          |      |              |
+| GBE_MDI1_P   | 192  | GBE_MDI1_P   | 3    | 4    | GBE_MDI2_P   | 198  | GBE_MDI4_P   |
+| GBE_MDI1_N   | 190  | GBE_MDI1_N   | 5    | 6    | GBE_MDI2_N   | 196  | GBE_MDI4_N   |
+|              |      | GND          | 7    | 8    | GND          |      |              |
+| GBE_MDI0_P   | 186  | GBE_MDI0_P   | 9    | 10   | GBE_MDI3_P   | 204  | GBE_MDI3_P   |
+| GBE_MDI0_N   | 184  | GBE_MDI0_N   | 11   | 12   | GBE_MDI3_N   | 202  | GBE_MDI3_N   |
+|              |      | GND          | 13   | 14   | GND          |      |              |
+| GBE_LED_LINK | 188  | GBE_LED_LINK | 15   | 16   | GBE_LED_ACT  | 194  | GBE_LED_ACT  |
+|              |      | GND          | 17   | 18   | GND          |      |              |
+| PCIE0_TX3_P  | 156  | PCIE0_TX3_P  | 19   | 20   | PCIE0_RX3_P  | 157  | PCIE0_RX3_P  |
+| PCIE0_TX3_N  | 154  | PCIE0_TX3_N  | 21   | 22   | PCIE0_RX3_N  | 155  | PCIE0_RX3_N  |
+|              |      | GND          | 23   | 24   | GND          |      |              |
+| PCIE0_TX2_P  | 150  | PCIE0_TX2_P  | 25   | 26   | PCIE0_RX2_P  | 151  | PCIE0_RX2_P  |
+| PCIE0_TX2_N  | 148  | PCIE0_TX2_N  | 27   | 28   | PCIE0_RX2_N  | 149  | PCIE0_RX2_N  |
+|              |      | GND          | 29   | 30   | GND          |      |              |
+|  PCIE0_TX1_P | 142  | PCIE0_TX1_P  | 31   | 32   | PCIE0_RX1_P  | 139  | PCIE0_RX1_P  |
+|  PCIE0_TX1_N | 140  | PCIE0_TX1_N  | 33   | 34   | PCIE0_RX1_N  | 137  | PCIE0_RX1_N  |
+|              |      | GND          | 35   | 36   | GND          |      |              |
+| PCIE0_TX0_P  | 136  | PCIE0_TX0_P  | 37   | 38   | PCIE0_RX0_P  | 133  | PCIE0_RX0_P  |
+| PCIE0_TX0_N  | 134  | PCIE0_TX0_N  | 39   | 40   | PCIE0_RX0_N  | 131  | PCIE0_RX0_N  |
+|              |      | GND          | 41   | 41   | GND          |      |              |
+| PCIE0_CLK_P  | 162  | PCIE0_CLK_P  | 43   | 44   | USB12_D_P    | Internal USB Hub   ||
+| PCIE0_CLK_N  | 160  | PCIE0_CLK_N  | 45   | 46   | USB12_D_N    | Internal USB Hub   ||
+|              |      | GND          | 47   | 48   | GND          |      |              |
+| PCIE0_WAKE   | 179  | PCIE0_WAKE   | 49   | 50   | UART1_CTS    | 209  | UART1_CTS    |
+| PCIE0_RST    | 181  | PCIE0_RST    | 51   | 52   | UART1_RTS    | 207  | UART1_RTS    |
+| PCIE0_CLKREQ | 180  | PCIE0_CLKREQ | 53   | 54   | UART1_RXD    | 205  | UART1_RXD    |
+|              |      | NC           | 55   | 56   | UART1_TXD    | 203  | UART1_TXD    |
+|              |      | NC           | 57   | 58   | GND          |      |              |
+|              |      | NC           | 59   | 60   | I2C_SDA      | 234  | I2C_SDA      |
+|              |      | NC           | 61   | 62   | I2C_SCL      | 232  | I2C_SCL      |
+|              |      | GND          | 63   | 64   | GND          |      |              | 
 |              |      | GND          | 65   | 66   | GND          |      |              |
-|              |      | VDD_3V3      | 67   | 68   | VDD_3V3      |      |              |
-|              |      | VDD_3V3      | 69   | 70   | VDD_3V3      |      |              |
+|              |      | VDD_5V       | 67   | 68   | VDD_5V       |      |              |
+|              |      | VDD_5V       | 69   | 70   | VDD_5V       |      |              |
 |              |      | GND          | 71   | 72   | GND          |      |              |
 |              |      | GND          | 73   | 74   | GND          |      |              |
-|              |      | VDD_5V       | 75   | 76   | VDD_5V       |      |              |
-|              |      | VDD_5V       | 77   | 78   | VDD_5V       |      |              |
-|              |      | Shield       | 79   | 80   | Shield       |      |              |
+|              |      | VDD_3V3      | 75   | 76   | VDD_3V3      |      |              |
+|              |      | VDD_3V3      | 77   | 78   | VDD_3V3      |      |              |
+|              |      | NC           | 79   | 80   | NC           |      |              |

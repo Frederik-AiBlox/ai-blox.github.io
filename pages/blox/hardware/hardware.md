@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Hardware
-parent: MODULE-X
+parent: BLOX
 has_children: true
 nav_order: 2
 ---
