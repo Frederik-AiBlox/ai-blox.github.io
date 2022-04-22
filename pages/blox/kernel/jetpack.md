@@ -8,6 +8,25 @@ nav_order: 1
 
 # JetPack support overview
 
+## JetPack 4.6.1
+
+### NVIDIA Product Pages
+* [JetPack SDK 4.6.1 RELEASE PAGE](https://developer.nvidia.com/jetpack-sdk-461)
+* [L4T R32.7.1 Release Page](https://developer.nvidia.com/embedded/linux-tegra-r3271)
+
+### AI-BLOX Product Support
+
+| Product  | Jetson         | Supported |
+|----------|----------------|-----------|
+| MX1010-1 | Nano           | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.6.1 Support]) |
+| MX1010-2 | Nano           | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.6.1 Support]) |
+| MX1020-1 | TX2 NX         | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.6.1 Support]) |
+| MX1020-2 | TX2 NX         | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.6.1 Support]) |
+| MX1030-1 | Xavier NX 8Gb  | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.6.1 Support]) |
+| MX1030-2 | Xavier NX 8Gb  | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.6.1 Support]) |
+| MX1030-3 | Xavier NX 16Gb | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.6.1 Support]) |
+| MX1030-4 | Xavier NX 16Gb | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.6.1 Support]) |
+
 ## JetPack 4.6
 
 ### NVIDIA Product Pages

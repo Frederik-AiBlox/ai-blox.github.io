@@ -2,7 +2,7 @@
 
 ## Run locally
 
-To run the jekyll local, uncomment the theme line and comment the remote_theme line as showed bellow.
+To run the jekyll local, uncomment the theme line and comment the remote_theme line in the _config.yml as showed bellow.
 
 ```yml
 #remote_theme              : pmarsceill/just-the-docs
@@ -17,7 +17,7 @@ $ bundle exec jekyll serve
 
 ## Publish on github pages
 
-To publish the documentation remotely, comment the theme line and uncomment the remote_theme line as showed bellow.
+To publish the documentation remotely, comment the theme line and uncomment the remote_theme line in the _config.yml as showed bellow.
 
 ```yml
 remote_theme              : pmarsceill/just-the-docs

@@ -117,7 +117,7 @@ This chapter shows you step by step how to start your development on the BLOX pl
 
 * To stream a camera to your host computer, you can use following command:
 
-      ai-blox@mx1010-1:~$ gst-launch-1.0 -e nvarguscamerasrc sensor_id=<id> ! 'video/x-raw(memory:NVMM), width=1920, height=1080, framerate=30/1' ! nvv4l2h264enc bitrate=8000000 insert-sps-pps=true ! rtph264pay mtu=1400 ! udpsink host=<host-ip port=5000 
+      ai-blox@mx1010-1:~$ gst-launch-1.0 -e nvarguscamerasrc sensor_id=<id> ! 'video/x-raw(memory:NVMM), width=1920, height=1080, framerate=30/1' ! nvv4l2h264enc bitrate=8000000 insert-sps-pps=true ! rtph264pay mtu=1400 ! udpsink host=<host-ip> port=5000 
    
   where `<id>` is the camera which you want to stream: 0, 1, 2, 3, 4 or 5 and `<host-ip>` is your host ip-address.
 
