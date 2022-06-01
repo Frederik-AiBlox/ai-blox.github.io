@@ -2,14 +2,7 @@
 
 ## Run locally
 
-To run the jekyll local, uncomment the theme line and comment the remote_theme line in the _config.yml as showed bellow.
-
-```yml
-#remote_theme              : pmarsceill/just-the-docs
-theme                     : just-the-docs
-```
-
-And start the jekyll with following command:
+You can run jekyll locally with follwing command:
 
 ```bash
 $ bundle exec jekyll serve
@@ -17,16 +10,11 @@ $ bundle exec jekyll serve
 
 ## Publish on github pages
 
-To publish the documentation remotely, comment the theme line and uncomment the remote_theme line in the _config.yml as showed bellow.
-
-```yml
-remote_theme              : pmarsceill/just-the-docs
-#theme                     : just-the-docs
-```
-
 Push the changes to the ai-blox.github.io site.
 
 ```bash
+$ git add .
+$ git commit -m 'my messages'
 $ git push
 ```
 
