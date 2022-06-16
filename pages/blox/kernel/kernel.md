@@ -38,11 +38,11 @@ http://releases.linaro.org/components/toolchain/binaries/7.3-2018.05/aarch64-lin
 ```shell
 $ mkdir $HOME/l4t-gcc
 $ cd $HOME/l4t-gcc
-$ tar xf gcc-linaro-7.3.1-2018.05-x86_64_aarch64-linux-gnu.tar.xz
+$ tar xf gcc-linaro-7.3.ht-install-a-sim-card-2018.05-x86_64_aarch64-linux-gnu.tar.xz
 ```
 
 ## Setting the CROSS_COMPILE Environment Variable
 
 ```shell
-$ export CROSS_COMPILE=$HOME/l4t-gcc/gcc-linaro-7.3.1-2018.05-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-
+$ export CROSS_COMPILE=$HOME/l4t-gcc/gcc-linaro-7.3.ht-install-a-sim-card-2018.05-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-
 ```
