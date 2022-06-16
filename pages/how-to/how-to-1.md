@@ -32,8 +32,8 @@ Following tools and modules are necessary for this how-to guide:
 * Loosen the 2 hex screws with the allen key
 
 <p align="left" style="margin-left: 1.4em">
-<img src="/assets/images/pages/how-to/ht-install-a-sim-card/Step1a.png" width="300">
-<img src="/assets/images/pages/how-to/ht-install-a-sim-card/Step1b.png" width="300">
+<img src="/assets/images/pages/how-to/1/Step1a.png" width="300">
+<img src="/assets/images/pages/how-to/1/Step1b.png" width="300">
 </p>
 
 ## Step 2
@@ -42,7 +42,7 @@ Following tools and modules are necessary for this how-to guide:
 * make sure you don't disconnect the antenna cables
 
 <p align="left" style="margin-left: 1.4em">
-<img src="/assets/images/pages/how-to/ht-install-a-sim-card/Step2.png" width="600">
+<img src="/assets/images/pages/how-to/1/Step2.png" width="600">
 </p>
 
 ## Step 3
@@ -59,13 +59,13 @@ This step need to be done carefully as it could damage the module.
 
 
 <p align="left" style="margin-left: 1.4em">
-<img src="/assets/images/pages/how-to/ht-install-a-sim-card/Step3a.png" width="600">
+<img src="/assets/images/pages/how-to/1/Step3a.png" width="600">
 </p>
 
 * move the gigabit ethernet board close to the cover as showed below
 
 <p align="left" style="margin-left: 1.4em">
-<img src="/assets/images/pages/how-to/ht-install-a-sim-card/Step3b.png" width="600">
+<img src="/assets/images/pages/how-to/1/Step3b.png" width="600">
 </p>
 
 ## Step 4
@@ -74,13 +74,13 @@ This step need to be done carefully as it could damage the module.
 * make sure the SIM card contacts are pointing below and not up
 
 <p align="left" style="margin-left: 1.4em">
-<img src="/assets/images/pages/how-to/ht-install-a-sim-card/Step4a.png" width="600">
+<img src="/assets/images/pages/how-to/1/Step4a.png" width="600">
 </p>
 
 * slide the SIM card gently into the holder all the way to the end as showed below
 
 <p align="left" style="margin-left: 1.4em">
-<img src="/assets/images/pages/how-to/ht-install-a-sim-card/Step4b.png" width="600">
+<img src="/assets/images/pages/how-to/1/Step4b.png" width="600">
 </p>
 
 ## Step 5
