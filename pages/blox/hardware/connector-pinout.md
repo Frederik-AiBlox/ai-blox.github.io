@@ -15,49 +15,49 @@ The MODULE-X device has 3 extension connectors. 2 for the interface slot and one
 
 ## Interface connector A
 
-| Jetson    || Interface Connector B                     |||| Jetson           ||
-| Name       | Pin# | Name       | Pin#       || Name       | Pin# | Name       |
-|:----------:|:----:|:----------:|:----:|:----:|:----------:|:----:|:----------:|
-|            |      | GND        | 1    | 2    | GND        |      |            |
-| SPI0_MOSI  | 89   | SPI0_MOSI  | 3    | 4    | SPI1_MOSI  | 104  | SPI1_MOSI  |
-| SPI0_SCK   | 91   | SPI0_SCK   | 5    | 6    | SPI1_SCK   | 106  | SPI1_SCK   |
-| SPI0_MISO  | 93   | SPI0_MISO  | 7    | 8    | SPI1_MISO  | 108  | SPI1_MISO  |
-| SPI0_CS0   | 95   | SPI0_CS0   | 9    | 10   | SPI1_CS0   | 110  | SPI1_CS0   |
-| SPIO_CS1   | 97   | SPIO_CS1   | 11   | 12   | SPI1_CS1   | 112  | SPI1_CS1   |
-|            |      | GND        | 13   | 14   | GND        |      |            |
-| USBSS_RX_N | 161  | USBSS_RX_N | 15   | 16   | USBSS_TX_N | 166  | USBSS_TX_N |
-| USBSS_RX_P | 162  | USBSS_RX_P | 17   | 18   | USBSS_TX_P | 168  | USBSS_TX_P |
-|            |      | GND        | 19   | 20   | GND        |      |            |
-| USB2_D_N   | 121  | USB2_D_N   | 21   | 22   | USB13_D_N  | Internal USB Hub ||
-| USB2_D_P   | 123  | USB2_D_P   | 23   | 24   | USB13_D_P  | Internal USB Hub ||
-|            |      | GND        | 25   | 26   | GND        |      |            |
-| CAN_RX     | 143  | CAN_RX     | 27   | 28   | I2C0_SCL   | 185  | I2C0_SCL   |
-| CAN_TX     | 145  | CAN_TX     | 29   | 30   | I2C0_SDA   | 187  | I2C0_SDA   |
-|            |      | GND        | 31   | 32   | GND        |      |            |
-|            |      | GND        | 33   | 34   | I2C1_SCL   | 189  | I2C1_SCL   |
-|            |      | GND        | 35   | 36   | I2C1_SDA   | 191  | I2C1_SDA   |
-|            |      | GND        | 37   | 38   | GND        |      |            |
-| I2S0_DOUT  | 193  | I2S0_DOUT  | 39   | 40   | I2S1_DOUT  | 220  | I2S1_DOUT  |
-| I2S0_DIN   | 195  | I2S0_DIN   | 41   | 41   | I2S1_DIN   | 222  | I2S1_DIN   |
-| I2S0_FS    | 197  | I2S0_FS    | 43   | 44   | I2S1_FS    | 224  | I2S1_FS    |
-| I2S0_SCLK  | 199  | I2S0_SCLK  | 45   | 46   | I2S1_SCLK  | 226  | I2S1_SCLK  |
-|            |      | GND        | 47   | 48   | GND        |      |            |
-| GPIO01     | 118  | GPIO01     | 49   | 50   | GPIO07     | 206  | GPIO07     |
-| GPIO02     | 124  | GPIO02     | 51   | 52   | GPIO08     | 208  | GPIO08     |
-| GPIO03     | 126  | GPIO03     | 53   | 54   | GPIO09     | 211  | GPIO09     |
-| GPIO04     | 127  | GPIO04     | 55   | 56   | GPIO10     | 212  | GPIO10     |
-| GPIO05     | 128  | GPIO05     | 57   | 58   | GPIO11     | 216  | GPIO11     |
-| GPIO06     | 130  | GPIO06     | 59   | 60   | GPIO12     | 218  | GPIO12     |
-|            |      | GND        | 61   | 62   | GND        |      |            |
-|            |      | GND        | 63   | 64   | GND        |      |            |
-| UART2_RXD  | 238  | UART2_RXD  | 65   | 66   | USB0_D_N   | 109  | USB0_D_N   |
-| UART2_TXD  | 236  | UART2_TXD  | 67   | 68   | USB0_D_P   | 111  | USB0_D_P   |
-|            |      | GND        | 69   | 70   | GND        |      |            |
-| GPIO00     | 87   | GPIO00     | 71   | 72   | FORCE_REC  | 214  | FORCE_REC  |
-|            |      | VIN        | 73   | 74   | VIN        |      |            |
-|            |      | VIN        | 75   | 76   | VIN        |      |            |
-|            |      | VIN        | 77   | 78   | VIN        |      |            |
-|            |      | SHIELD     | 79   | 80   | SHIELD     |      |            |
+| Jetson    || Interface Connector B                      |||| Jetson           ||
+| Name       | Pin# | Name       | Pin#       || Name        | Pin# | Name       |
+|:----------:|:----:|:----------:|:----:|:----:|:-----------:|:----:|:----------:|
+|            |      | GND        | 1    | 2    | GND         |      |            |
+| SPI0_MOSI  | 89   | SPI0_MOSI  | 3    | 4    | SPI1_MOSI   | 104  | SPI1_MOSI  |
+| SPI0_SCK   | 91   | SPI0_SCK   | 5    | 6    | SPI1_SCK    | 106  | SPI1_SCK   |
+| SPI0_MISO  | 93   | SPI0_MISO  | 7    | 8    | SPI1_MISO   | 108  | SPI1_MISO  |
+| SPI0_CS0   | 95   | SPI0_CS0   | 9    | 10   | ETH_LINK    |      |            |
+| SPIO_CS1   | 97   | SPIO_CS1   | 11   | 12   | ETH_SPEED   |      |            |
+|            |      | GND        | 13   | 14   | GND         |      |            |
+| USBSS_RX_P | 162  | USBSS_RX_P | 15   | 16   | USBSS_TX_P  | 168  | USBSS_TX_P |
+| USBSS_RX_N | 161  | USBSS_RX_N | 17   | 18   | USBSS_TX_N  | 166  | USBSS_TX_N |
+|            |      | GND        | 19   | 20   | GND         |      |            |
+| USB2_D_N   | 121  | USB2_D_N   | 21   | 22   | USB13_D_N   | Internal USB Hub ||
+| USB2_D_P   | 123  | USB2_D_P   | 23   | 24   | USB13_D_P   | Internal USB Hub ||
+|            |      | GND        | 25   | 26   | GND         |      |            |
+| CAN_RX     | 143  | CAN_RX     | 27   | 28   | I2C0_SCL    | 185  | I2C0_SCL   |
+| CAN_TX     | 145  | CAN_TX     | 29   | 30   | I2C0_SDA    | 187  | I2C0_SDA   |
+|            |      | GND        | 31   | 32   | GND         |      |            |
+| I2C1_SDA   | 191  | I2C1_SDA   | 33   | 34   | ETH_RX_P    | Eth1 100Mbp MAC  ||
+| I2C1_SCL   | 189  | I2C1_SCL   | 35   | 36   | ETH_RX_N    | Eth1 100Mbp MAC  ||
+|            |      | GND        | 37   | 38   | 3V3_A_ETH   | Eth1 100Mbp MAC  ||
+| I2S1_DOUT  | 220  | I2S1_DOUT  | 39   | 40   | ETH_TX_P    | Eth1 100Mbp MAC  ||
+| I2S1_DIN   | 222  | I2S1_DIN   | 41   | 41   | ETH_TX_N    | Eth1 100Mbp MAC  ||
+| I2S1_FS    | 224  | I2S1_FS    | 43   | 44   | GND         |      |            |
+| I2S1_SCLK  | 226  | I2S1_SCLK  | 45   | 46   | HDMI_TXD0_N |      |            |
+|            |      | GND        | 47   | 48   | HDMI_TXD0_P |      |            |
+| GPIO01     | 118  | GPIO01     | 49   | 50   | GND         |      |            |
+| GPIO02     | 124  | GPIO02     | 51   | 52   | HDMI_TXD1_N |      |            |
+| GPIO03     | 126  | GPIO03     | 53   | 54   | HDMI_TXD1_P |      |            |
+| GPIO04     | 127  | GPIO04     | 55   | 56   | GND         |      |            |
+| GPIO05     | 128  | GPIO05     | 57   | 58   | HDMI_TXD2_N |      |            |
+| GPIO06     | 130  | GPIO06     | 59   | 60   | HDMI_TXD2_P |      |            |
+| GPIO08     | 208  | GPIO08     | 61   | 62   | GND         |      |            |
+| GPIO09     | 211  | GPIO09     | 63   | 64   | HDMI_TXDC_N |      |            |
+| GPIO10     | 212  | GPIO10     | 65   | 66   | HDMI_TXDC_P |      |            |
+|            |      | +5V_HDMI   | 67   | 68   | GND         |      |            |
+|            |      | HDMI_CEC   | 69   | 70   | HDMI_SCL    |      |            |
+|            |      | HDMI_HPD   | 71   | 72   | HDMI_SDA    |      |            |
+|            |      | GND        | 73   | 74   | GND         |      |            |
+|            |      | VIN        | 75   | 76   | VIN         |      |            |
+|            |      | VIN        | 77   | 78   | VIN         |      |            |
+|            |      | VIN        | 79   | 80   | VIN         |      |            |
 
 ## Interface connector B
 
