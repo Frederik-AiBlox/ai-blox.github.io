@@ -18,7 +18,7 @@ This page describe the steps necessary for installing a SIM card for the [CB-020
 The [CB-0200](/pages/comm-modules/CB-0200.html) and [CB-0210](/pages/comm-modules/CB-0210.html) communication modules have an internal LTE Cat. 4 modem. 
 This modem needs a SIM card to register itselves to a cellular network. This how-to describes the steps to take to install the SIM card into the BLOX device.
 
-# Prerequisites
+## Prerequisites
 
 Following tools and modules are necessary for this how-to guide:
 * Allen key size 2.
