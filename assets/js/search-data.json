@@ -1,0 +1,644 @@
+{"0": {
+    "doc": "CB-0010",
+    "title": "Gigabit ethernet communication module",
+    "content": "100Mbs/1Gbps Ethernet communication module for BLOX platform . ",
+    "url": "https://docs.ai-blox.com/pages/comm-modules/CB-0010.html#gigabit-ethernet-communication-module",
+    "relUrl": "/pages/comm-modules/CB-0010.html#gigabit-ethernet-communication-module"
+  },"1": {
+    "doc": "CB-0010",
+    "title": "Description",
+    "content": "The CB-0010 allows you to connect the BLOX to an 100Mbps/1Gbps ethernet network. The module has an standard RJ45 connector with status leds. ",
+    "url": "https://docs.ai-blox.com/pages/comm-modules/CB-0010.html#description",
+    "relUrl": "/pages/comm-modules/CB-0010.html#description"
+  },"2": {
+    "doc": "CB-0010",
+    "title": "Block diagram",
+    "content": ". The above diagram shows the block diagram of the communication module. The module has one RJ45 socket with build-in magnetics. There are also 2 status LEDs available: . | Link status - Green LED | Activity status - Orange LED | . ",
+    "url": "https://docs.ai-blox.com/pages/comm-modules/CB-0010.html#block-diagram",
+    "relUrl": "/pages/comm-modules/CB-0010.html#block-diagram"
+  },"3": {
+    "doc": "CB-0010",
+    "title": "Connections",
+    "content": ". P1 port . The P1 port is a standard RJ45 socket . | Pin# | Pin Name | Description | . | 1 | TxRx A + |   | . | 2 | TxRx A - |   | . | 3 | TxRx B + |   | . | 4 | TxRx C + |   | . | 5 | TxRx C - |   | . | 6 | TxRx B - |   | . | 7 | TxRx D + |   | . | 8 | TxRx D - |   | . ",
+    "url": "https://docs.ai-blox.com/pages/comm-modules/CB-0010.html#connections",
+    "relUrl": "/pages/comm-modules/CB-0010.html#connections"
+  },"4": {
+    "doc": "CB-0010",
+    "title": "CB-0010",
+    "content": " ",
+    "url": "https://docs.ai-blox.com/pages/comm-modules/CB-0010.html",
+    "relUrl": "/pages/comm-modules/CB-0010.html"
+  },"5": {
+    "doc": "AP282",
+    "title": "AP482: Ten 32-Bit Counter / Timer Module",
+    "content": " ",
+    "url": "https://docs.ai-blox.com/pages/comm-modules/acropack/CB-0011-AP482.html#ap482-ten-32-bit-counter--timer-module",
+    "relUrl": "/pages/comm-modules/acropack/CB-0011-AP482.html#ap482-ten-32-bit-counter--timer-module"
+  },"6": {
+    "doc": "AP282",
+    "title": "Software setup",
+    "content": "Before using the AP482, you must install the AcroPack SDK on the BLOX. This chapter will guide you step by step to make sure everything is setup well. Step 1 download the SDK . First of all, you need to download the latest version of the APSW-API-LNX from the AcroPack website. Therefore you need to create an account on the AcroMag website and go to this page. When the SDK is downloaded, unzip it on your local drive. Step 2 copy the SDK to the BLOX . Go to the directory where you unpacked the SDK and copy the files to the BLOX with following command: . $ sftp ai-blox@192.168.1.143 ai-blox@192.168.1.143 password: **** connected to 192.168.1.143 sftp&gt; put -r 9500491D_SW . Where 192.168.1.143 is the IP address of the BLOX and 9500491D_SW is the unpacked directory. Both may be different in your case. Step 3 login at the BLOX and check the AcroPack module . Next you need to login the blox and verify if the AcroPack module is recognized: . $ ssh ai-blox@192.168.1.143 ai-blox@192.168.1.143 password: **** ai-blox@ubuntu:~$ lspci 0004:00:00.0 PCI bridge: NVIDIA Corporation Device 1ad1 (rev a1) 0005:00:00.0 PCI bridge: NVIDIA Corporation Device 1ad0 (rev a1) 0005:01:00.0 Signal processing controller: Acromag, Inc. AP482 Counter Timer Module with TTL Level Input/Output . The last line tells us the the AP482 AcroPack module is corrected installed. Step 4 build the kernel module . The AP482 need a kernel module to operate correctly. To build the module, you need to go to the ~/9500491D/AP48X/dev48x directory and execute make. ai-blox@ubuntu:~$ cd 9500491D_SW/AP48X/dev48x ai-blox@ubuntu:~/9500491D_SW/AP48X/dev48x$ make make -C /lib/modules/4.9.253-tegra/build M=/home/ai-blox/9500491D_SW/AP48X/dev48x modules make[1]: Entering directory '/usr/src/linux-headers-4.9.253-tegra-ubuntu18.04_aarch64/kernel-4.9' CC [M] /home/ai-blox/9500491D_SW/AP48X/dev48x/dev48x.o LD [M] /home/ai-blox/9500491D_SW/AP48X/dev48x/ap482.o Building modules, stage 2. MODPOST 1 modules CC /home/ai-blox/9500491D_SW/AP48X/dev48x/ap482.mod.o LD [M] /home/ai-blox/9500491D_SW/AP48X/dev48x/ap482.ko make[1]: Leaving directory '/usr/src/linux-headers-4.9.253-tegra-ubuntu18.04_aarch64/kernel-4.9' ai-blox@ubuntu:~/9500491D_SW/AP48X/dev48x$ ls ap482.ko ap482.mod.c ap482.mod.o ap482.o dev48x.c dev48x.o info.txt Makefile modules.order Module.symvers . If everything went well, you will see the ap482.ko kernel module. Step 5 install the kernel module . You need to copy the ap482.ko file to the /lib/modules directory and rebuild the module dependency list. ai-blox@ubuntu:~/9500491D_SW/AP48X/dev48x$ sudo cp ap482.ko /lib/modules/$(uname -r)/kernel/ ai-blox@ubuntu:~/9500491D_SW/AP48X/dev48x$ sudo depmod . To auto load the module during boot, you need to add ap482 to the /etc/modules file . ai-blox@ubuntu:~/9500491D_SW/AP48X/dev48x$ echo ap482 | sudo tee -a /etc/modules . To test if everything went well, reboot the device and check if the module is loaded . ai-blox@ubuntu:~$ lsmod | grep ap482 ap482 11342 0 . Step 6 add device nodes . Next we need to create the device node for the AcroPack module. To do this automatically after each boot, we need to add some code to the /etc/rc.local file. If the /etc/rc.local doesn’t exist, you need to create this file. ai-blox@ubuntu:~$ sudo vim /etc/rc.local . Make sure following code is add to the file . #!/bin/bash #Acromag ap482 if [ ! -r /dev/ap482_0 ]; then /bin/mknod -m 666 /dev/ap482_0 c 46 0 #(1st board) /bin/mknod -m 666 /dev/ap482_1 c 46 1 #(2nd board) /bin/mknod -m 666 /dev/ap482_2 c 46 2 #(3rd board) /bin/mknod -m 666 /dev/ap482_3 c 46 3 #(4th board) fi . Save the fill and in case you created the rc.local file, you need to set the permissions right. ai-blox@ubuntu:~$ sudo chmod +x /etc/rc.local . Reboot the device now and check if the device nodes are created after reboot. ai-blox@ubuntu:~$ ls /dev/ap* /dev/ap482_0 /dev/ap482_1 /dev/ap482_2 /dev/ap482_3 . Step 7 test the device . Now all modules and device nodes are created, we can test the AcroPack module. The easiest way to do this is by using the example code in sdk. ai-blox@ubuntu:~$ cd 9500491D_SW/AP48X/ ai-blox@ubuntu:~/9500491D_SW/AP48X$ make cc -Wall -c ../apcommon/apcommon.c cc -Wall -c rmid48x.c cc -Wall -c rpntdio.c cc -Wall -c rprtdio.c cc -Wall -c wpntdio.c cc -Wall -c wprtdio.c cc -Wall -c cnfgct.c cc -Wall -c drvr48x.c cc -o a.out apcommon.o rmid48x.o\\ rpntdio.o rprtdio.o wpntdio.o wprtdio.o cnfgct.o drvr48x.o ai-blox@ubuntu:~/9500491D_SW/AP48X$ chmod +x a.out ai-blox@ubuntu:~/9500491D_SW/AP48X$ ./a.out . This will start the demo program which allows you to configure the module. Please check the user manual of the module in case of any questions. ",
+    "url": "https://docs.ai-blox.com/pages/comm-modules/acropack/CB-0011-AP482.html#software-setup",
+    "relUrl": "/pages/comm-modules/acropack/CB-0011-AP482.html#software-setup"
+  },"7": {
+    "doc": "AP282",
+    "title": "I/O connections",
+    "content": "| : P2 Connector :| | : AcroPack Module :| | : P2 Connector :| |   |   |   | . | Description | Pin# | Pin# | Pin# | Pin# | Description | . | Out3 | 1 | 69 | 1 | 35 | In1 A | . | Out2 | 2 | 70 | 2 | 36 | In0 A | . | Out5 | 3 | 73 | 5 | 37 | In3 A | . | Out4 | 4 | 74 | 6 | 38 | In2 A | . | Out7 | 5 | 77 | 9 | 39 | In5 A | . | Out6 | 6 | 78 | 10 | 40 | In4 A | . | Out9 | 7 | 81 | 13 | 41 | In7 A | . | Out8 | 8 | 82 | 14 | 42 | In6 A | . | Dout1 | 9 | 85 | 17 | 43 | In9 A | . | Dout0 | 10 | 86 | 18 | 44 | In8 A | . | DOut3 | 11 | 89 | 21 | 45 | In1 B | . | Dout2 | 12 | 90 | 22 | 46 | In0 B | . | Dout5 | 13 | 93 | 25 | 47 | In3 B | . | Dout4 | 14 | 94 | 26 | 48 | In2 B | . | GND | 15 | 97 | 29 | 49 | In5 B | . | Ext. Clock | 16 | 98 | 30 | 50 | In4 B | . | GROUND | 17 |   | 33 | 51 | In7 B | . | GROUND | 18 |   | 34 | 52 | In6 B | . | GROUND | 19 |   | 37 | 53 | In9 B | . | GROUND | 20 |   | 38 | 54 | In8 B | . | GROUND | 21 |   | 41 | 55 | In1 C | . | GROUND | 22 |   | 42 | 56 | In0 C | . | GROUND | 23 |   | 45 | 57 | In3 C | . | GROUND | 24 |   | 46 | 58 | In2 C | . | GROUND | 25 |   | 49 | 59 | In5 C | . | GROUND | 26 |   | 50 | 60 | In4 C | . | GROUND | 27 |   | 53 | 61 | In7 C | . | GROUND | 28 |   | 54 | 62 | In6 C | . | GROUND | 29 |   | 57 | 63 | In9 C | . | GROUND | 30 |   | 58 | 64 | In8 C | . | GROUND | 31 |   | 61 | 65 | Din1 | . | GROUND | 32 |   | 62 | 66 | Din0 | . | GROUND | 33 |   | 65 | 67 | Out1 | . | GROUND | 34 |   | 66 | 68 | Out0 | . ",
+    "url": "https://docs.ai-blox.com/pages/comm-modules/acropack/CB-0011-AP482.html#io-connections",
+    "relUrl": "/pages/comm-modules/acropack/CB-0011-AP482.html#io-connections"
+  },"8": {
+    "doc": "AP282",
+    "title": "AP282",
+    "content": " ",
+    "url": "https://docs.ai-blox.com/pages/comm-modules/acropack/CB-0011-AP482.html",
+    "relUrl": "/pages/comm-modules/acropack/CB-0011-AP482.html"
+  },"9": {
+    "doc": "CB-0011",
+    "title": "Gigabit ethernet communication module with AcroPack interface",
+    "content": "100Mbs/1Gbps Ethernet communication module for BLOX platform with an AcroPack interface . ",
+    "url": "https://docs.ai-blox.com/pages/comm-modules/CB-0011.html#gigabit-ethernet-communication-module-with-acropack-interface",
+    "relUrl": "/pages/comm-modules/CB-0011.html#gigabit-ethernet-communication-module-with-acropack-interface"
+  },"10": {
+    "doc": "CB-0011",
+    "title": "Description",
+    "content": "The CM-0011 allows you to connect the BLOX to an 100Mbps/1Gbps ethernet network. The module has an standard RJ45 connector with status leds. The module also has an AcroPack interface. This allows you to add any of the AcroPack modules sold by AcroMag. The table below shows an overview of all available AcroPack modules. | Model | Order Code | Description | . | : **Analog I/O Modules** :|| |   |   | . | AP220 | CB-0011-AP220 | 12-Bit DAC Module | . | AP225 | CB-0011-AP225 | 12-Bit DAC Waveform Output Module | . | AP226 | CB-0011-AP226 | 12-Bit DAC Module | . | AP231 | CB-0011-AP231 | 16-Bit DAC Module | . | AP235 | CB-0011-AP235 | 16-Bit DAC Waveform Output Module | . | AP236 | CB-0011-AP236 | 16-Bit DAC Module | . | AP323 | CB-0011-AP323 | 16-Bit ADC High Density Analog Input Module | . | AP341 | CB-0011-AP341 | 14-Bit High Density ADC Module | . | AP342 | CB-0011-AP342 | 14-Bit High Density Isolated ADC Module | . | : **Digital I/O Modules** :|| |   |   | . | AP408 | CB-0011-AP408 | 32 Ch High Voltage Digital Input/Output Module | . | AP418 | CB-0011-AP418 | 16 Ch High Voltage Digital Input/Output Module | . | AP441 | CB-0011-AP441 | 32 Ch Isolated Digital Input with Interrupts Module | . | AP445 | CB-0011-AP445 | 32 Ch Solid-State Isolated Digital Output Module | . | AP471 | CB-0011-AP471 | 48 Ch TTL Level Digital I/O | . | : **FPGA I/O Modules** :|| |   |   | . | APA7-500 | CB-0011-APA7-500 | Reconfigurable Xilinx® Artix®-7 FPGA Module | . | APZU | CB-0011-APZU | User-Configurable Zynq® UltraScale+ MPSoC I/O Modules | . | : **Communication Modules** :|| |   |   | . | AP500 | CB-0011-AP500 | Quad Serial RS232 Communication Module | . | AP512 | CB-0011-AP512 | Quad Isolated Serial RS422b/485 Communication Module | . | AP513 | CB-0011-AP513 | Quad Isolated Serial RS232 Communication Module | . | AP520 | CB-0011-AP520 | Octal Serial RS232 Communication Module | . | AP522 | CB-0011-AP522 | Octal Serial RS422/485 Communication Module | . | AP560A | CB-0011-AP560A | Isolated CAN Bus Interface Module | . | AP570 | CB-0011-AP570 | MIL-STD-1553 Communication Module | . | AP580 | CB-0011-AP580 | 1Gb Ethernet with Optional Power over Ethernet Module | . | : **Counter/Timer Modules** :|| |   |   | . | AP482 | CB-0011-AP482 | Ten 32-Bit Counter / Timer Module | . | AP483 | CB-0011-AP482 | Eight 32-Bit Counter / Timer Module | . | AP484 | CB-0011-AP482 | Six 32-Bit Counter / Timer Module | . | : **Multi-function I/O** :|| |   |   | . | AP730 | CB-011-AP730 | Multi-function I/O | . ",
+    "url": "https://docs.ai-blox.com/pages/comm-modules/CB-0011.html#description",
+    "relUrl": "/pages/comm-modules/CB-0011.html#description"
+  },"11": {
+    "doc": "CB-0011",
+    "title": "Block diagram",
+    "content": ". The above diagram shows the block diagram of the communication module. The module has one RJ45 socket and one I/O connector. The RJ45 socket has 2 build in status LEDs which shows the Link and Activity status of the Gigabit ethernet connection. Inside the module, there is a mPCIe slot where the AcroPack module can be plugged-in. All the I/O connections of the AcroPack module are made available through a 68-pin I/O connector. Please check the user manual of the AcroPack module to see which connections are available as this will depend of the AcroPack module. ",
+    "url": "https://docs.ai-blox.com/pages/comm-modules/CB-0011.html#block-diagram",
+    "relUrl": "/pages/comm-modules/CB-0011.html#block-diagram"
+  },"12": {
+    "doc": "CB-0011",
+    "title": "Connections",
+    "content": ". P1 port . The P1 port is a standard RJ45 socket . | Pin# | Pin Name | Description | . | 1 | TxRx A + |   | . | 2 | TxRx A - |   | . | 3 | TxRx B + |   | . | 4 | TxRx C + |   | . | 5 | TxRx C - |   | . | 6 | TxRx B - |   | . | 7 | TxRx D + |   | . | 8 | TxRx D - |   | . P2 Port . The P2 port is a female 68-pin AMPLIMITE 0.50 connector from TE. The type number is 5749721-7. The male counterpart is 1-5750913-7. There are 2 backshells available: . | 5749195-2 has an 180° (straight) cable exit | 5749204-2 has an 75° cable exit | . The table belows shows the general pin-out for the P2 port. Depending of the installed AcroPack module, this pin-out will be differend. Check therefore the AcroPack module page on the left side. If the module page isn’t available, please contact us. | : P2 Connector :| | AcroPack Module | | : P2 Connector :| |   |   |   | . | Description | Pin# | Pin# | Pin# | Pin# | Description | . | Field I/O 36 | 1 | 69 | 1 | 35 | Field I/O 2 | . | Field I/O 35 | 2 | 70 | 2 | 36 | Field I/O 1 | . | Field I/O 38 | 3 | 73 | 5 | 37 | Field I/O 4 | . | Field I/O 37 | 4 | 74 | 6 | 38 | Field I/O 3 | . | Field I/O 40 | 5 | 77 | 9 | 39 | Field I/O 6 | . | Field I/O 39 | 6 | 78 | 10 | 40 | Field I/O 5 | . | Field I/O 42 | 7 | 81 | 13 | 41 | Field I/O 8 | . | Field I/O 41 | 8 | 82 | 14 | 42 | Field I/O 7 | . | Field I/O 44 | 9 | 85 | 17 | 43 | Field I/O 10 | . | Field I/O 43 | 10 | 86 | 18 | 44 | Field I/O 9 | . | Field I/O 46 | 11 | 89 | 21 | 45 | Field I/O 12 | . | Field I/O 45 | 12 | 90 | 22 | 46 | Field I/O 11 | . | Field I/O 48 | 13 | 93 | 25 | 47 | Field I/O 14 | . | Field I/O 47 | 14 | 94 | 26 | 48 | Field I/O 13 | . | Field I/O 50 | 15 | 97 | 29 | 49 | Field I/O 16 | . | Field I/O 49 | 16 | 98 | 30 | 50 | Field I/O 15 | . | GROUND | 17 |   | 33 | 51 | Field I/O 18 | . | GROUND | 18 |   | 34 | 52 | Field I/O 17 | . | GROUND | 19 |   | 37 | 53 | Field I/O 20 | . | GROUND | 20 |   | 38 | 54 | Field I/O 19 | . | GROUND | 21 |   | 41 | 55 | Field I/O 22 | . | GROUND | 22 |   | 42 | 56 | Field I/O 21 | . | GROUND | 23 |   | 45 | 57 | Field I/O 24 | . | GROUND | 24 |   | 46 | 58 | Field I/O 23 | . | GROUND | 25 |   | 49 | 59 | Field I/O 26 | . | GROUND | 26 |   | 50 | 60 | Field I/O 25 | . | GROUND | 27 |   | 53 | 61 | Field I/O 28 | . | GROUND | 28 |   | 54 | 62 | Field I/O 27 | . | GROUND | 29 |   | 57 | 63 | Field I/O 30 | . | GROUND | 30 |   | 58 | 64 | Field I/O 29 | . | GROUND | 31 |   | 61 | 65 | Field I/O 32 | . | GROUND | 32 |   | 62 | 66 | Field I/O 31 | . | GROUND | 33 |   | 65 | 67 | Field I/O 34 | . | GROUND | 34 |   | 66 | 68 | Field I/O 33 | . ",
+    "url": "https://docs.ai-blox.com/pages/comm-modules/CB-0011.html#connections",
+    "relUrl": "/pages/comm-modules/CB-0011.html#connections"
+  },"13": {
+    "doc": "CB-0011",
+    "title": "CB-0011",
+    "content": " ",
+    "url": "https://docs.ai-blox.com/pages/comm-modules/CB-0011.html",
+    "relUrl": "/pages/comm-modules/CB-0011.html"
+  },"14": {
+    "doc": "CB-0200",
+    "title": "LTE Cat. 4 cellular communication module",
+    "content": "LTE Cat. 4 cellular modem for BLOX platform . ",
+    "url": "https://docs.ai-blox.com/pages/comm-modules/CB-0200.html#lte-cat-4-cellular-communication-module",
+    "relUrl": "/pages/comm-modules/CB-0200.html#lte-cat-4-cellular-communication-module"
+  },"15": {
+    "doc": "CB-0200",
+    "title": "Description",
+    "content": "The CB-0200 is a modular communication module for the BLOX platform and a LTE Cat. 4 modem to the BLOX module. This makes the module ideal for projects where you need cellular communication. This module needs a SIM card, follow the how to install the SIM card to install the SIM card. ",
+    "url": "https://docs.ai-blox.com/pages/comm-modules/CB-0200.html#description",
+    "relUrl": "/pages/comm-modules/CB-0200.html#description"
+  },"16": {
+    "doc": "CB-0200",
+    "title": "Block diagram",
+    "content": ". The above diagram shows the block diagram of the communication module. The module has an internal mPCIe modem which connect to the BLOX. On the field side, there are 3 SMA connectors for connecting the antennas. ",
+    "url": "https://docs.ai-blox.com/pages/comm-modules/CB-0200.html#block-diagram",
+    "relUrl": "/pages/comm-modules/CB-0200.html#block-diagram"
+  },"17": {
+    "doc": "CB-0200",
+    "title": "Connections",
+    "content": ". P1 Port . The P1 port is used to connect the main LTE antenna. It’s a SMA connector. P2 Port . The P2 port is used to connect the GNSS antenna. It’s a SMA connector. P3 Port . The P3 port is used to connect the auxiliary LTE antenna. Its’ a SMA connector. ",
+    "url": "https://docs.ai-blox.com/pages/comm-modules/CB-0200.html#connections",
+    "relUrl": "/pages/comm-modules/CB-0200.html#connections"
+  },"18": {
+    "doc": "CB-0200",
+    "title": "CB-0200",
+    "content": " ",
+    "url": "https://docs.ai-blox.com/pages/comm-modules/CB-0200.html",
+    "relUrl": "/pages/comm-modules/CB-0200.html"
+  },"19": {
+    "doc": "CB-0210",
+    "title": "Gigabit ethernet + LTE Cat. 4 cellular communication module",
+    "content": "100Mbs/1Gbps Ethernet communication module with a LTE Cat. 4 cellular modem for BLOX platform . ",
+    "url": "https://docs.ai-blox.com/pages/comm-modules/CB-0210.html#gigabit-ethernet--lte-cat-4-cellular-communication-module",
+    "relUrl": "/pages/comm-modules/CB-0210.html#gigabit-ethernet--lte-cat-4-cellular-communication-module"
+  },"20": {
+    "doc": "CB-0210",
+    "title": "Description",
+    "content": "The CB-0210 is a modular communication module for the BLOX platform and adds a 100Mbps/1Gbps ethernet port and a LTE Cat. 4 modem to the BLOX module. This makes the module ideal for projects where you need cellular communication in combination with a gigabit ethernet network. This module needs a SIM card, follow the how to install the SIM card to install the SIM card. ",
+    "url": "https://docs.ai-blox.com/pages/comm-modules/CB-0210.html#description",
+    "relUrl": "/pages/comm-modules/CB-0210.html#description"
+  },"21": {
+    "doc": "CB-0210",
+    "title": "Block diagram",
+    "content": ". The above diagram shows the block diagram of the communication module. The module has one RJ45 socket with build-in magnetics. There are also 2 status LEDs available: . | Link status - Green LED | Activity status - Orange LED | . The module has also an internal mPCIe modem which connect to the BLOX. On the field side, there are 3 SMA connectors for connecting the antennas. ",
+    "url": "https://docs.ai-blox.com/pages/comm-modules/CB-0210.html#block-diagram",
+    "relUrl": "/pages/comm-modules/CB-0210.html#block-diagram"
+  },"22": {
+    "doc": "CB-0210",
+    "title": "Connections",
+    "content": ". P1 port . The P1 port is a standard RJ45 socket . | Pin# | Pin Name | Description | . | 1 | TxRx A + |   | . | 2 | TxRx A - |   | . | 3 | TxRx B + |   | . | 4 | TxRx C + |   | . | 5 | TxRx C - |   | . | 6 | TxRx B - |   | . | 7 | TxRx D + |   | . | 8 | TxRx D - |   | . P2 Port . The P2 port is used to connect the main LTE antenna. It’s a SMA connector. P3 Port . The P3 port is used to connect the GNSS antenna. It’s a SMA connector. P4 Port . The P4 port is used to connect the auxiliary LTE antenna. Its’ a SMA connector. ",
+    "url": "https://docs.ai-blox.com/pages/comm-modules/CB-0210.html#connections",
+    "relUrl": "/pages/comm-modules/CB-0210.html#connections"
+  },"23": {
+    "doc": "CB-0210",
+    "title": "CB-0210",
+    "content": " ",
+    "url": "https://docs.ai-blox.com/pages/comm-modules/CB-0210.html",
+    "relUrl": "/pages/comm-modules/CB-0210.html"
+  },"24": {
+    "doc": "IB-0100",
+    "title": "6-Channel MIPI interface module",
+    "content": "The 6-Channel MIPI interface module allows you to connect up to 6 MIPI cameras. ",
+    "url": "https://docs.ai-blox.com/pages/interface-modules/IB-0100.html#6-channel-mipi-interface-module",
+    "relUrl": "/pages/interface-modules/IB-0100.html#6-channel-mipi-interface-module"
+  },"25": {
+    "doc": "IB-0100",
+    "title": "Description",
+    "content": "The IM-0100 allows you to connect up to 6 MIPI cameras to the BLOX device. The maximum number of cameras depends on the Jetson Module. For the Jetson Nano, you can only connect up to 3 cameras. For the Jetson TX2 NX and the Jetson Xavier NX, you can connect up to 6 cameras. The module has also a USB3.0 port. This port can be used to connect external USB devices like a SSD drive or keyboard/mouser. ",
+    "url": "https://docs.ai-blox.com/pages/interface-modules/IB-0100.html#description",
+    "relUrl": "/pages/interface-modules/IB-0100.html#description"
+  },"26": {
+    "doc": "IB-0100",
+    "title": "Camera support",
+    "content": "Currently the module supports the IMX219 camera, here you can find out how you can use the camera on the BLOX platform. If you need an other camera, please contact us at support and we are happy check if we can provide a driver. ",
+    "url": "https://docs.ai-blox.com/pages/interface-modules/IB-0100.html#camera-support",
+    "relUrl": "/pages/interface-modules/IB-0100.html#camera-support"
+  },"27": {
+    "doc": "IB-0100",
+    "title": "Block diagram",
+    "content": ". The above diagram shows the block diagram of the interface module. At the top, we have 3 connectors: . | Power connector for powering the BLOX device | Serial connector for connecting the boot terminal | USB connector for flashing the BLOX device | . There is an button on the module, which allows you to place the BLOX in recovery mode. When the device is in recovery mode, you can flash the Jetson module through the USB. There are in total 6 FPC connectors for connecting the cameras. Those connectors are compatible with the Raspberry Pi camera connector. Each camera has it’s own 2-lane MIPI channel. ",
+    "url": "https://docs.ai-blox.com/pages/interface-modules/IB-0100.html#block-diagram",
+    "relUrl": "/pages/interface-modules/IB-0100.html#block-diagram"
+  },"28": {
+    "doc": "IB-0100",
+    "title": "Connections",
+    "content": ". CAM 0 to CAM 5 port . The connector type used on the module is the 1-1734248-5 connector from TE Connectivity. The connector is pin compatible with the Raspbery Pi camera connector. | Pin# | Pin Name | Description | . | 1 | GND | Ground | . | 2 | CSI_D0_N | MIPI Data Lane 0 Negative | . | 3 | CSI_D0_P | MIPI Data Lane 0 Positive | . | 4 | GND | Ground | . | 5 | CSI_D1_N | MIPI Data Lane 1 Negative | . | 6 | CSI_D1_P | MIPI Data Lane 1 Positive | . | 7 | GND | Ground | . | 8 | CSI_CLK_N | MIPI Clock Lane Negative | . | 9 | CSI_CLK_P | MIPI Clock Lane Positive | . | 10 | GND | Ground | . | 11 | CAM_PWDN | CAM Power Down | . | 12 | CAM_MCLK | CAM Master CLock | . | 13 | GND | I2C SCL | . | 14 | GND | I2C SDA | . | 15 | GND | 3.3V Power | . Debug Port . The debug port is compatible with the TTL-232R-3V3 cable from FTDI-chip. Pin 1 is the black cable on the connector. | Pin# | Pin Name | Description | . | 1 | GND | Ground (Black) | . | 2 | NC | Not Connected | . | 3 | NC | Not Connected | . | 4 | TXD | Transmit (3V3) | . | 5 | RXD | Receive (3V3) | . | 6 | NC | Not Connected | . ",
+    "url": "https://docs.ai-blox.com/pages/interface-modules/IB-0100.html#connections",
+    "relUrl": "/pages/interface-modules/IB-0100.html#connections"
+  },"29": {
+    "doc": "IB-0100",
+    "title": "IB-0100",
+    "content": " ",
+    "url": "https://docs.ai-blox.com/pages/interface-modules/IB-0100.html",
+    "relUrl": "/pages/interface-modules/IB-0100.html"
+  },"30": {
+    "doc": "IB-0200",
+    "title": "4-Channel USB3.0 with 4-DO and 4-DI interface module",
+    "content": "An interface module for interfacing up to 4 USB3.0 cameras and with digital I/O for interfacing to PLC-systems. ",
+    "url": "https://docs.ai-blox.com/pages/interface-modules/IB-0200.html#4-channel-usb30-with-4-do-and-4-di-interface-module",
+    "relUrl": "/pages/interface-modules/IB-0200.html#4-channel-usb30-with-4-do-and-4-di-interface-module"
+  },"31": {
+    "doc": "IB-0200",
+    "title": "Description",
+    "content": "This module can be used in applications where USB3.0 is required and some input/output interfacing is necessary. The module has 4 USB3.0 standard-A ports and has an internal USB3.0 hub controller on the module which support following speed modes: . | Super Speed (SS) - 5 Gbps | High Speed (HS) - 480 Mbps | Full Speed (FS) - 12 Mbps | Low Speed (LS) - 1.5 Mbps | . This allows you to stream up to 4 cameras in high resolution and a high frame rate. All ports are backwards compatible with USB2.0. The module has also 4 Digital Outputs (DO) and 4 Digital Inputs (DI). Both are 24VDC compatible and are optical isolated from the BLOX device. Those I/O can used to interface with a remote system such as a PLC system. ",
+    "url": "https://docs.ai-blox.com/pages/interface-modules/IB-0200.html#description",
+    "relUrl": "/pages/interface-modules/IB-0200.html#description"
+  },"32": {
+    "doc": "IB-0200",
+    "title": "Block diagram",
+    "content": ". The above diagram shows the block diagram of the interface module. There are 3 main parts: . | USB3.0 Hub | Digital Output circuits | Digital Input circuits | . The USB3.0 Hub is connected to the BLOX USB3.0 port. This way, the BLOX USB3.0 port is extended with 4 USB3.0 ports P1…P4. The digital outputs and inputs are galvanic isolated from the BLOX. This allows you to use 2 different power supplies: one for the BLOX (24VDC) and the other for the I/O (24VDC I/O). ",
+    "url": "https://docs.ai-blox.com/pages/interface-modules/IB-0200.html#block-diagram",
+    "relUrl": "/pages/interface-modules/IB-0200.html#block-diagram"
+  },"33": {
+    "doc": "IB-0200",
+    "title": "Connections",
+    "content": ". P1 to P4 port . The Px are the USB3.0 ports and compatible with the USB3.0 standard-A. | Pin# | Pin Name | Description | . | Shell | Shield | Metal housing | . | 1 | VBUS | Power | . | 2 | D- | USB 2.0 differential pair - negative signal | . | 3 | D+ | USB 2.0 differential pair - positive signal | . | 4 | GND | Ground for power return | . | 5 | StdA_SSRX- | SuperSpeed receiver differential pair - negative signal | . | 6 | StdA_SSRX+ | SuperSpeed receiver differential pair - positive signal | . | 7 | GND_DRAIN | Ground for signal return | . | 8 | StdA_SSTX- | SuperSpeed transmitter differential pair - negative signal | . | 9 | StdA_SSTX+ | SuperSpeed transmitter differential pair - positive signal | . I/O Port . | Description | Pin Name | Pin# | Pin# | Pin Name | Description | . | I/O Power Supply + | 24V I/O | 1 | 20 | 24V I/O | I/O Power Supply + | . | I/O Power Supply - | 0V I/O | 2 | 19 | 0V I/O | I/O Power Supply - | . | Output Channel 1 | OUT 1 | 3 | 18 | IN 1 | Input Channel 1 | . | I/O +24V | 24V I/O | 4 | 17 | 24V_I/O | I/O +24V | . | Output Channel 2 | OUT 2 | 5 | 16 | IN 2 | Input Channel 2 | . | I/O +24V | 24V I/O | 6 | 15 | 24V_I/O | I/O +24V | . | Output Channel 3 | OUT 3 | 7 | 14 | IN 3 | Input Channel 3 | . | I/O +24V | 24V I/O | 8 | 13 | 24V_I/O | I/O +24V | . | Output Channel 4 | OUT 4 | 9 | 12 | IN 4 | Input Channel 4 | . | I/O +24V | 24V I/O | 10 | 11 | 24V_I/O | I/O +24V | . Accessing I/O Ports . We are developing a python library for accessing the I/O Ports, however this library is not yet available. For now, you can access the I/O Ports through the file system with the commands below. For MX1030-x (Xavier NX) . | The table below shows the relationship between the GPIO numbers and the DI/DO ports. You need those GPIO numbers to access the ports: | . | Port | GPIO # | . | DO1 | 417 | . | DO2 | 420 | . | DO3 | 418 | . | DO4 | 424 | . | DI1 | 421 | . | DI2 | 419 | . | DI3 | 264 | . | DI4 | 265 | . | First we need to make the GPIO pins available to the fs: . $ sudo echo 417 &gt; /sys/class/gpio/export $ sudo echo 420 &gt; /sys/class/gpio/export $ sudo echo 418 &gt; /sys/class/gpio/export $ sudo echo 424 &gt; /sys/class/gpio/export $ sudo echo 421 &gt; /sys/class/gpio/export $ sudo echo 419 &gt; /sys/class/gpio/export $ sudo echo 264 &gt; /sys/class/gpio/export $ sudo echo 265 &gt; /sys/class/gpio/export . | Second, we need to configure the port direction correctly: . $ echo out &gt; /sys/class/gpio/gpio417/direction $ echo out &gt; /sys/class/gpio/gpio420/direction $ echo out &gt; /sys/class/gpio/gpio418/direction $ echo out &gt; /sys/class/gpio/gpio424/direction $ echo in &gt; /sys/class/gpio/gpio421/direction $ echo in &gt; /sys/class/gpio/gpio419/direction $ echo in &gt; /sys/class/gpio/gpio264/direction $ echo in &gt; /sys/class/gpio/gpio265/direction . | Finally, you can control the I/O ports through the value property: . # For DI1 $ cat /sys/class/gpio/gpio421/value 0 # For DO1 $ echo 1 &gt; /sys/class/gpio417/value . | . ",
+    "url": "https://docs.ai-blox.com/pages/interface-modules/IB-0200.html#connections",
+    "relUrl": "/pages/interface-modules/IB-0200.html#connections"
+  },"34": {
+    "doc": "IB-0200",
+    "title": "IB-0200",
+    "content": " ",
+    "url": "https://docs.ai-blox.com/pages/interface-modules/IB-0200.html",
+    "relUrl": "/pages/interface-modules/IB-0200.html"
+  },"35": {
+    "doc": "IB-1200",
+    "title": "4-Channel USB3.0 with 4-DO and 4-DI interface module, IP67",
+    "content": "An interface module for interfacing up to 4 USB3.0 cameras and with digital I/O for interfacing to PLC-systems. ",
+    "url": "https://docs.ai-blox.com/pages/interface-modules/IB-1200.html#4-channel-usb30-with-4-do-and-4-di-interface-module-ip67",
+    "relUrl": "/pages/interface-modules/IB-1200.html#4-channel-usb30-with-4-do-and-4-di-interface-module-ip67"
+  },"36": {
+    "doc": "IB-1200",
+    "title": "Description",
+    "content": "This module can be used in applications where USB3.0 is required and some input/output interfacing is necessary. The module has 4 USB3.0 standard-A ports and has an internal USB3.0 hub controller on the module which support following speed modes: . | Super Speed (SS) - 5 Gbps | High Speed (HS) - 480 Mbps | Full Speed (FS) - 12 Mbps | Low Speed (LS) - 1.5 Mbps | . This allows you to stream up to 4 cameras in high resolution and a high frame rate. All ports are backwards compatible with USB2.0. The module has also 4 Digital Outputs (DO) and 4 Digital Inputs (DI). Both are 24VDC compatible and are optical isolated from the MODULE-X device. Those I/O can used to interface with a remote system such as a PLC system. ",
+    "url": "https://docs.ai-blox.com/pages/interface-modules/IB-1200.html#description",
+    "relUrl": "/pages/interface-modules/IB-1200.html#description"
+  },"37": {
+    "doc": "IB-1200",
+    "title": "Block diagram",
+    "content": ". The above diagram shows the block diagram of the interface module. There are 3 main parts: . | USB3.0 Hub | Digital Output circuits | Digital Input circuits | . The USB3.0 Hub is connected to the MODULE-X USB3.0 port. This way, the MODULE-X USB3.0 port is extended with 4 USB3.0 ports P1…P4. The digital outputs and inputs are galvanic isolated from the MODULE-X. This allows you to use 2 different power supplies: one for the MODULE-X (24VDC) and the other for the I/O (24VDC I/O). ",
+    "url": "https://docs.ai-blox.com/pages/interface-modules/IB-1200.html#block-diagram",
+    "relUrl": "/pages/interface-modules/IB-1200.html#block-diagram"
+  },"38": {
+    "doc": "IB-1200",
+    "title": "Connections",
+    "content": ". P1 to P4 port . The Px are the USB3.0 ports and compatible with the USB3.0 standard-A. | Pin# | Pin Name | Description | . | Shell | Shield | Metal housing | . | 1 | VBUS | Power | . | 2 | D- | USB 2.0 differential pair - negative signal | . | 3 | D+ | USB 2.0 differential pair - positive signal | . | 4 | GND | Ground for power return | . | 5 | StdA_SSRX- | SuperSpeed receiver differential pair - negative signal | . | 6 | StdA_SSRX+ | SuperSpeed receiver differential pair - positive signal | . | 7 | GND_DRAIN | Ground for signal return | . | 8 | StdA_SSTX- | SuperSpeed transmitter differential pair - negative signal | . | 9 | StdA_SSTX+ | SuperSpeed transmitter differential pair - positive signal | . I/O Power Port . The I/O power port is used for powering the DI and DO circuits. This power supply needs always be applied as this power supply is galvanic isolated from the BLOX power supply. Type: 3-pins, M8 female connector, A-coding . | Pin# | Pin Name | Description | . | 1 | 24V I/O | I/O Power Supply + | . | 2 | NC | Do not connected | . | 3 | 0V I/O | I/O Power Supply - | . DI 1/2 Port . The DI 1/2 port is the first digital input port. Type: 4-pins, M8 male connector, A-coding . | Pin# | Pin Name | Description | . | 1 | 24V I/O | Positive I/O power supply | . | 2 | DI 1 | Digital input 1 | . | 3 | DI 2 | Digital input 2 | . | 4 | 0V I/O | Negative I/O Power Supply | . DI 2/3 Port . The DI 2/3 port is the second digital input port. Type: 4-pins, M8 male connector, A-coding . | Pin# | Pin Name | Description | . | 1 | 24V I/O | Positive I/O power supply | . | 2 | DI 2 | Digital input 2 | . | 3 | DI 3 | Digital input 3 | . | 4 | 0V I/O | Negative I/O Power Supply | . DO 1/2 Port . The DO 1/2 port is the first digital output port. Type: 4-pins, M8 female connector, A-coding . | Pin# | Pin Name | Description | . | 1 | 24V I/O | Positive I/O power supply | . | 2 | DO 1 | Digital output 1 | . | 3 | DO 2 | Digital output 2 | . | 4 | 0V I/O | Negative I/O Power Supply | . DO 2/3 Port . The DO 2/3 port is the second digital output port. Type: 4-pins, M8 female connector, A-coding . | Pin# | Pin Name | Description | . | 1 | 24V I/O | Positive I/O power supply | . | 2 | DO 2 | Digital output 2 | . | 3 | DO 3 | Digital output 3 | . | 4 | 0V I/O | Negative I/O Power Supply | . ",
+    "url": "https://docs.ai-blox.com/pages/interface-modules/IB-1200.html#connections",
+    "relUrl": "/pages/interface-modules/IB-1200.html#connections"
+  },"39": {
+    "doc": "IB-1200",
+    "title": "IB-1200",
+    "content": " ",
+    "url": "https://docs.ai-blox.com/pages/interface-modules/IB-1200.html",
+    "relUrl": "/pages/interface-modules/IB-1200.html"
+  },"40": {
+    "doc": "AI-BLOX L4T R32.4.3",
+    "title": "AI-BLOX L4T R32.4.3",
+    "content": ". ",
+    "url": "https://docs.ai-blox.com/pages/blox/kernel/aib-r32.4.3.html",
+    "relUrl": "/pages/blox/kernel/aib-r32.4.3.html"
+  },"41": {
+    "doc": "Comm Modules",
+    "title": "Communication Modules",
+    "content": "This pages shows the available communication modules. | Order Code | Reference | Description | . | [CB-0010](CB-0010.html) | 10.50.0010 | Gigabit ethernet communication module | . | [CB-0011](CB-0011.html) | 10.50.0011 | Gigabit ethernet communication module with AcroPack interface | . | [CB-0200](CB-0200.html) | 10.50.0200 | LTE Cat. 4 cellular communication module | . | [CB-0210](CB-0210.html) | 10.50.0210 | Gigabit ethernet + LTE Cat. 4 cellular communication module | . ",
+    "url": "https://docs.ai-blox.com/pages/comm-modules/comm-modules.html#communication-modules",
+    "relUrl": "/pages/comm-modules/comm-modules.html#communication-modules"
+  },"42": {
+    "doc": "Comm Modules",
+    "title": "Comm Modules",
+    "content": " ",
+    "url": "https://docs.ai-blox.com/pages/comm-modules/comm-modules.html",
+    "relUrl": "/pages/comm-modules/comm-modules.html"
+  },"43": {
+    "doc": "Connector pinout",
+    "title": "Connector pinout",
+    "content": "The MODULE-X device has 3 extension connectors. 2 for the interface slot and one for the communication slot. ",
+    "url": "https://docs.ai-blox.com/pages/blox/hardware/connector-pinout.html",
+    "relUrl": "/pages/blox/hardware/connector-pinout.html"
+  },"44": {
+    "doc": "Connector pinout",
+    "title": "Interface connector A",
+    "content": "| Jetson | | Interface Connector A ||| | Jetson | |   |   |   |   |   | . | Name | Pin# | Name | Pin# | | Name | Pin# | Name |   | . |   |   | GND | 1 | 2 | GND |   |   | . | CSI0_CLK_N | 10 | CSI0_CLK_N | 3 | 4 | CSI2_CLK_N | 28 | CSI2_CLK_N | . | CSI0_CLK_P | 12 | CSI0_CLK_P | 5 | 6 | CSI2_CLK_P | 30 | CSI2_CLK_P | . |   |   | GND | 7 | 8 | GND |   |   | . | CSI0_D0_N | 4 | CSI0_D0_N | 9 | 10 | CSI2_D0_N | 22 | CSI2_D0_N | . | CSI0_D0_P | 6 | CSI0_D0_P | 11 | 12 | CSI2_D0_P | 24 | CSI2_D0_P | . |   |   | GND | 13 | 14 | GND |   |   | . | CSI0_D1_N | 16 | CSI0_D1_N | 15 | 16 | CSI2_D1_N | 34 | CSI2_D1_N | . | CSI0_D1_P | 18 | CSI0_D1_P | 17 | 18 | CSI2_D1_P | 36 | CSI2_D1_P | . |   |   | GND | 19 | 20 | GND |   |   | . | CSI1_CLK_N | 9 | CSI1_CLK_N | 21 | 22 | CSI3_CLK_N | 27 | CSI3_CLK_N | . | CSI1_CLK_P | 11 | CSI1_CLK_P | 23 | 24 | CSI3_CLK_P | 29 | CSI3_CLK_P | . |   |   | GND | 25 | 26 | GND |   |   | . | CSI1_D0_N | 3 | CSI1_D0_N | 27 | 28 | CSI3_D0_N | 21 | CSI3_D0_N | . | CSI1_D0_P | 5 | CSI1_D0_P | 29 | 30 | CSI3_D0_P | 23 | CSI3_D0_P | . |   |   | GND | 31 | 32 | GND |   |   | . | CSI1_D1_N | 15 | CSI1_D1_N | 33 | 34 | CSI3_D1_N | 33 | CSI3_D1_N | . | CSI1_D1_P | 17 | CSI1_D1_P | 35 | 36 | CSI3_D1_P | 35 | CSI3_D1_P | . |   |   | GND | 37 | 38 | GND |   |   | . | CSI4_CLK_N | 52 | CSI4_CLK_N | 39 | 40 | DSI_CLK_N | 76 | DSI_CLK_N | . | CSI4_CLK_P | 54 | CSI4_CLK_P | 41 | 41 | DSI_CLK_P | 78 | DSI_CLK_P | . |   |   | GND | 43 | 44 | GND |   |   | . | CSI4_D0_N | 46 | CSI4_D0_N | 45 | 46 | DSI_D0_N | 70 | DSI_D0_N | . | CSI4_D0_P | 48 | CSI4_D0_P | 47 | 48 | DSI_D0_P | 73 | DSI_D0_P | . |   |   | GND | 49 | 50 | GND |   |   | . | CSI4_D1_N | 58 | CSI4_D1_N | 51 | 52 | DSI_D1_N | 82 | DSI_D1_N | . | CSI4_D1_P | 60 | CSI4_D1_P | 53 | 54 | DSI_D1_P | 84 | DSI_D1_P | . |   |   | GND | 55 | 56 | GND |   |   | . | CSI4_D2_N | 40 | CSI4_D2_N | 57 | 58 | CAM_I2C_SCL | 213 | CAM_I2C_SCL | . | CSI4_D2_P | 42 | CSI4_D2_P | 59 | 60 | CAM_I2C_SDA | 215 | CAM_I2C_SDA | . |   |   | GND | 61 | 62 | CAM0_PWDN | 114 | CAM0_PWDN | . | CSI4_D3_N | 64 | CSI4_D3_N | 63 | 64 | CAM0_MCLK | 116 | CAM0_MCLK | . | CSI4_D3_P | 66 | CSI4_D3_P | 65 | 66 | CAM1_PWDN | 120 | CAM1_PWDN | . |   |   | GND | 67 | 68 | CAM1_MCLK | 122 | CAM1_MCLK | . |   |   | GND | 69 | 70 | GND |   |   | . |   |   | VDD_3V3 | 71 | 72 | VDD_3V3 |   |   | . |   |   | VDD_3V3 | 73 | 74 | VDD_3V3 |   |   | . |   |   | GND | 75 | 76 | GND |   |   | . |   |   | VDD_5V | 77 | 78 | VDD_5V |   |   | . |   |   | VDD_5V | 79 | 80 | VDD_5V |   |   | . ",
+    "url": "https://docs.ai-blox.com/pages/blox/hardware/connector-pinout.html#interface-connector-a",
+    "relUrl": "/pages/blox/hardware/connector-pinout.html#interface-connector-a"
+  },"45": {
+    "doc": "Connector pinout",
+    "title": "Interface connector B",
+    "content": "| Jetson | | Interface Connector B ||| | Jetson | |   |   |   |   |   | . | Name | Pin# | Name | Pin# | | Name | Pin# | Name |   | . |   |   | GND | 1 | 2 | GND |   |   | . | SPI0_MOSI | 89 | SPI0_MOSI | 3 | 4 | SPI1_MOSI | 104 | SPI1_MOSI | . | SPI0_SCK | 91 | SPI0_SCK | 5 | 6 | SPI1_SCK | 106 | SPI1_SCK | . | SPI0_MISO | 93 | SPI0_MISO | 7 | 8 | SPI1_MISO | 108 | SPI1_MISO | . | SPI0_CS0 | 95 | SPI0_CS0 | 9 | 10 | ETH_LINK | Eth1 100Mbp MAC | |   | . | SPIO_CS1 | 97 | SPIO_CS1 | 11 | 12 | ETH_SPEED | Eth1 100Mbp MAC | |   | . |   |   | GND | 13 | 14 | GND |   |   | . | USBSS_RX_P | 162 | USBSS_RX_P | 15 | 16 | USBSS_TX_P | 168 | USBSS_TX_P | . | USBSS_RX_N | 161 | USBSS_RX_N | 17 | 18 | USBSS_TX_N | 166 | USBSS_TX_N | . |   |   | GND | 19 | 20 | GND |   |   | . | USB2_D_N | 121 | USB2_D_N | 21 | 22 | USB13_D_N | Internal USB Hub | |   | . | USB2_D_P | 123 | USB2_D_P | 23 | 24 | USB13_D_P | Internal USB Hub | |   | . |   |   | GND | 25 | 26 | GND |   |   | . | CAN_RX | 143 | CAN_RX | 27 | 28 | I2C0_SCL | 185 | I2C0_SCL | . | CAN_TX | 145 | CAN_TX | 29 | 30 | I2C0_SDA | 187 | I2C0_SDA | . |   |   | GND | 31 | 32 | GND |   |   | . | I2C1_SDA | 191 | I2C1_SDA | 33 | 34 | ETH_RX_P | Eth1 100Mbp MAC | |   | . | I2C1_SCL | 189 | I2C1_SCL | 35 | 36 | ETH_RX_N | Eth1 100Mbp MAC | |   | . |   |   | GND | 37 | 38 | 3V3_A_ETH | Eth1 100Mbp MAC | |   | . | I2S1_DOUT | 220 | I2S1_DOUT | 39 | 40 | ETH_TX_P | Eth1 100Mbp MAC | |   | . | I2S1_DIN | 222 | I2S1_DIN | 41 | 41 | ETH_TX_N | Eth1 100Mbp MAC | |   | . | I2S1_FS | 224 | I2S1_FS | 43 | 44 | GND |   |   | . | I2S1_SCLK | 226 | I2S1_SCLK | 45 | 46 | HDMI_TXD0_N |   |   | . |   |   | GND | 47 | 48 | HDMI_TXD0_P |   |   | . | GPIO01 | 118 | GPIO01 | 49 | 50 | GND |   |   | . | GPIO02 | 124 | GPIO02 | 51 | 52 | HDMI_TXD1_N |   |   | . | GPIO03 | 126 | GPIO03 | 53 | 54 | HDMI_TXD1_P |   |   | . | GPIO04 | 127 | GPIO04 | 55 | 56 | GND |   |   | . | GPIO05 | 128 | GPIO05 | 57 | 58 | HDMI_TXD2_N |   |   | . | GPIO06 | 130 | GPIO06 | 59 | 60 | HDMI_TXD2_P |   |   | . | GPIO08 | 208 | GPIO08 | 61 | 62 | GND |   |   | . | GPIO09 | 211 | GPIO09 | 63 | 64 | HDMI_TXDC_N |   |   | . | GPIO10 | 212 | GPIO10 | 65 | 66 | HDMI_TXDC_P |   |   | . |   |   | +5V_HDMI | 67 | 68 | GND |   |   | . |   |   | HDMI_CEC | 69 | 70 | HDMI_SCL |   |   | . |   |   | HDMI_HPD | 71 | 72 | HDMI_SDA |   |   | . |   |   | GND | 73 | 74 | GND |   |   | . |   |   | VIN | 75 | 76 | VIN |   |   | . |   |   | VIN | 77 | 78 | VIN |   |   | . |   |   | VIN | 79 | 80 | VIN |   |   | . ",
+    "url": "https://docs.ai-blox.com/pages/blox/hardware/connector-pinout.html#interface-connector-b",
+    "relUrl": "/pages/blox/hardware/connector-pinout.html#interface-connector-b"
+  },"46": {
+    "doc": "Connector pinout",
+    "title": "Comm connector A",
+    "content": "| Jetson | | Comm Connector 1 ||| | Jetson | |   |   |   |   |   | . | Name | Pin# | Name | Pin# | | Name | Pin# | Name |   | . |   |   | NC | 01 | 02 | NC |   |   | . |   |   | VDD_3V3 | 03 | 04 | VDD_3V3 |   |   | . |   |   | VDD_3V3 | 05 | 06 | VDD_3V3 |   |   | . |   |   | GND | 07 | 08 | GND |   |   | . |   |   | GND | 09 | 10 | GND |   |   | . |   |   | VDD_5V | 11 | 12 | VDD_5V |   |   | . |   |   | VDD_5V | 13 | 14 | VDD_5V |   |   | . |   |   | GND | 15 | 16 | GND |   |   | . |   |   | GND | 17 | 18 | GND |   |   | . |   |   | NC | 19 | 20 | I2C2_SCL | 232 | I2C2_SCL | . |   |   | NC | 21 | 22 | I2C2_SDA | 234 | I2C2_SDA | . |   |   | NC | 23 | 24 | GND |   |   | . |   |   | NC | 25 | 26 | UART1_TXD | 203 | UART1_TXD | . | PCIE0_CLKREQ | 180 | PCIE0_CLKREQ | 27 | 28 | UART1_RXD | 205 | UART1_RXD | . | PCIE0_RST | 181 | PCIE0_RST | 29 | 30 | UART1_RTS | 207 | UART1_RTS | . | PCIE0_WAKE | 179 | PCIE0_WAKE | 31 | 32 | UART1_CTS | 209 | UART1_CTS | . |   |   | GND | 33 | 34 | GND |   |   | . | PCIE0_CLK_N | 160 | PCIE0_CLK_N | 35 | 36 | USB12_D_N | Internal USB Hub | |   | . | PCIE0_CLK_P | 162 | PCIE0_CLK_P | 37 | 38 | USB12_D_P | Internal USB Hub | |   | . |   |   | GND | 39 | 40 | GND |   |   | . | PCIE0_TX0_N | 134 | PCIE0_TX0_N | 41 | 42 | PCIE0_RX0_N | 131 | PCIE0_RX0_N | . | PCIE0_TX0_P | 136 | PCIE0_TX0_P | 43 | 44 | PCIE0_RX0_P | 133 | PCIE0_RX0_P | . |   |   | GND | 45 | 46 | GND |   |   | . | PCIE0_TX1_N | 140 | PCIE0_TX1_N | 47 | 48 | PCIE0_RX1_N | 137 | PCIE0_RX1_N | . | PCIE0_TX1_P | 142 | PCIE0_TX1_P | 49 | 50 | PCIE0_RX1_P | 139 | PCIE0_RX1_P | . |   |   | GND | 51 | 52 | GND |   |   | . | PCIE0_TX2_N | 148 | PCIE0_TX2_N | 53 | 54 | PCIE0_RX2_N | 149 | PCIE0_RX2_N | . | PCIE0_TX2_P | 150 | PCIE0_TX2_P | 55 | 56 | PCIE0_RX2_P | 151 | PCIE0_RX2_P | . |   |   | GND | 57 | 58 | GND |   |   | . | PCIE0_TX3_N | 154 | PCIE0_TX3_N | 59 | 60 | PCIE0_RX3_N | 155 | PCIE0_RX3_N | . | PCIE0_TX3_P | 156 | PCIE0_TX3_P | 61 | 62 | PCIE0_RX3_P | 157 | PCIE0_RX3_P | . |   |   | GND | 63 | 64 | GND |   |   | . | GBE_LED_LINK | 188 | GBE_LED_LINK | 65 | 66 | GBE_LED_ACT | 194 | GBE_LED_ACT | . |   |   | GND | 67 | 68 | GND |   |   | . | GBE_MDI0_N | 184 | GBE_MDI0_N | 69 | 70 | GBE_MDI3_N | 202 | GBE_MDI3_N | . | GBE_MDI0_P | 186 | GBE_MDI0_P | 71 | 72 | GBE_MDI3_P | 204 | GBE_MDI3_P | . |   |   | GND | 73 | 74 | GND |   |   | . | GBE_MDI1_N | 190 | GBE_MDI1_N | 75 | 76 | GBE_MDI2_N | 196 | GBE_MDI4_N | . | GBE_MDI1_P | 192 | GBE_MDI1_P | 77 | 78 | GBE_MDI2_P | 198 | GBE_MDI4_P | . |   |   | GND | 79 | 80 | GND |   |   | . ",
+    "url": "https://docs.ai-blox.com/pages/blox/hardware/connector-pinout.html#comm-connector-a",
+    "relUrl": "/pages/blox/hardware/connector-pinout.html#comm-connector-a"
+  },"47": {
+    "doc": "Display",
+    "title": "Display",
+    "content": " ",
+    "url": "https://docs.ai-blox.com/pages/blox/hardware/display.html",
+    "relUrl": "/pages/blox/hardware/display.html"
+  },"48": {
+    "doc": "Getting started",
+    "title": "Getting started",
+    "content": ". This chapter shows you step by step how to start your development on the BLOX platform. ",
+    "url": "https://docs.ai-blox.com/pages/blox/getting-started.html",
+    "relUrl": "/pages/blox/getting-started.html"
+  },"49": {
+    "doc": "Getting started",
+    "title": "Prerequisites",
+    "content": ". | BLOX device with 6-Channel MIPI interface module and gigabit ethernet Module (Dev KIT) | System running Ubuntu 18.04 | USB Serial to TTL 3V3 cable: TTL-232R-3V3 | Ethernet cable | . ",
+    "url": "https://docs.ai-blox.com/pages/blox/getting-started.html#prerequisites",
+    "relUrl": "/pages/blox/getting-started.html#prerequisites"
+  },"50": {
+    "doc": "Getting started",
+    "title": "Connect to the BLOX",
+    "content": ". | Plug an ethernet cable in the ethernet port of the module. Make sure your network supports DHCP. | Plug the TTL-232R-3V3 to the debug port of the module. The black cable need to be at the BLK label. | Find the serial port on your computer: . $ ls /dev/tty* /dev/ttyUSB0 . | Open a console with the command . $ sudo screen /dev/ttyUSB0 115200 . | Power the module by plug the power jack into DC Power connector . | When the module is booted, you can login with user: ai-blox and password ai-blox: . Ubuntu 18.04.5 LTS mx1020-1 ttyTCU0 mx1020-1 login: ai-blox Password: Last login: Mon Nov 22 08:40:23 EST 2021 from 172.16.1.119 on pts/0 Welcome to Ubuntu 18.04.5 LTS (GNU/Linux 4.9.140-tegra aarch64) * Documentation: https://help.ubuntu.com * Management: https://landscape.canonical.com * Support: https://ubuntu.com/advantage This system has been minimized by removing packages and content that are not required on a system that users do not log into. To restore this content, you can run the 'unminimize' command. 319 packages can be updated. 229 updates are security updates. ai-blox@mx1020-1:~$ . | To find out the IP address of the module, you can use following command: . ai-blox@mx1020-1:~\\$ ifconfig | grep inet inet 172.16.1.127 netmask 255.255.255.0 broadcast 172.16.1.255 . | Now you can connect through ssh from your host computer, password is ai-blox: . $ ssh ai-blox@172.16.1.127 Welcome to Ubuntu 18.04.5 LTS (GNU/Linux 4.9.140-tegra aarch64) * Documentation: https://help.ubuntu.com * Management: https://landscape.canonical.com * Support: https://ubuntu.com/advantage This system has been minimized by removing packages and content that are not required on a system that users do not log into. To restore this content, you can run the 'unminimize' command. 319 packages can be updated. 229 updates are security updates. Last login: Mon Nov 22 08:46:32 2021 from 172.16.1.104 ai-blox@mx1020-1:~$ . | . ",
+    "url": "https://docs.ai-blox.com/pages/blox/getting-started.html#connect-to-the-blox",
+    "relUrl": "/pages/blox/getting-started.html#connect-to-the-blox"
+  },"51": {
+    "doc": "Getting started",
+    "title": "Camera Test",
+    "content": ". | Connect 1 or more IMX219 cameras to the BLOX. The table below shows which CAM ports are available. This depends of the Jetson Module: | . | Ports | Jetson Nano | Jetson TX2 NX | Jetson Xavier | . | ^^ | ^^ MX1010-x | ^^ MX1020-x | ^^ MX1030-x | . | CAM0 Port | /dev/video0 | /dev/video0 | /dev/video0 | . | CAM1 Port |   | /dev/video1 | /dev/video1 | . | CAM2 Port | /dev/video1 | /dev/video2 | /dev/video2 | . | CAM3 Port |   | /dev/video3 | /dev/video3 | . | CAM4 Port | /dev/video2 | /dev/video4 | /dev/video4 | . | CAM5 Port |   | /dev/video5 | /dev/video5 | . | Boot the module and verify if the cameras are found: . ai-blox@mx1010-1:~$ ls /dev/video* -all crw-rw----+ 1 root video 81, 0 Nov 10 09:18 /dev/video0 crw-rw----+ 1 root video 81, 3 Nov 10 09:18 /dev/video1 crw-rw----+ 1 root video 81, 6 Nov 10 09:18 /dev/video2 . | If not all cameras are founded, you can do an extra check with following command: . ai-blox@mx1010-1:~\\$ dmesg | grep imx [ 1.715280] imx219 30-0010: tegracam sensor driver:imx219_v2.0.6 [ 1.741765] imx219 32-0010: tegracam sensor driver:imx219_v2.0.6 [ 1.768122] imx219 34-0010: tegracam sensor driver:imx219_v2.0.6 [ 1.948532] vi 54080000.vi: subdev imx219 30-0010 bound [ 1.949398] vi 54080000.vi: subdev imx219 32-0010 bound [ 1.950247] vi 54080000.vi: subdev imx219 34-0010 bound . | To stream a camera to your host computer, you can use following command: . ai-blox@mx1010-1:~$ gst-launch-1.0 -e nvarguscamerasrc sensor_id=&lt;id&gt; ! 'video/x-raw(memory:NVMM), width=1920, height=1080, framerate=30/1' ! nvv4l2h264enc bitrate=8000000 insert-sps-pps=true ! rtph264pay mtu=1400 ! udpsink host=&lt;host-ip&gt; port=5000 . where &lt;id&gt; is the camera which you want to stream: 0, 1, 2, 3, 4 or 5 and &lt;host-ip&gt; is your host ip-address. | To capture the camera stream on your host computer, you can use following command: . ai-blox@mx1010-1:~$ gst-launch-1.0 udpsrc port=5000 ! application/x-rtp,payload=96 ! rtph264depay ! avdec_h264 ! autovideosink . | . ",
+    "url": "https://docs.ai-blox.com/pages/blox/getting-started.html#camera-test",
+    "relUrl": "/pages/blox/getting-started.html#camera-test"
+  },"52": {
+    "doc": "Hardware",
+    "title": "Hardware",
+    "content": " ",
+    "url": "https://docs.ai-blox.com/pages/blox/hardware/hardware.html",
+    "relUrl": "/pages/blox/hardware/hardware.html"
+  },"53": {
+    "doc": "How to install a SIM card",
+    "title": "How-to install a SIM card into the BLOX",
+    "content": "This page describe the steps necessary for installing a SIM card for the CB-0200 and CB-0210 modules . ",
+    "url": "https://docs.ai-blox.com/pages/how-to/how-to-1.html#how-to-install-a-sim-card-into-the-blox",
+    "relUrl": "/pages/how-to/how-to-1.html#how-to-install-a-sim-card-into-the-blox"
+  },"54": {
+    "doc": "How to install a SIM card",
+    "title": "Introduction",
+    "content": "The CB-0200 and CB-0210 communication modules have an internal LTE Cat. 4 modem. This modem needs a SIM card to register itselves to a cellular network. This how-to describes the steps to take to install the SIM card into the BLOX device. ",
+    "url": "https://docs.ai-blox.com/pages/how-to/how-to-1.html#introduction",
+    "relUrl": "/pages/how-to/how-to-1.html#introduction"
+  },"55": {
+    "doc": "How to install a SIM card",
+    "title": "Prerequisites",
+    "content": "Following tools and modules are necessary for this how-to guide: . | Allen key size 2. | Flat head screwdriver with max. tip width of 3mm. | Any BLOX device with at CB-0200 or CB-0210 communication module. | . ",
+    "url": "https://docs.ai-blox.com/pages/how-to/how-to-1.html#prerequisites",
+    "relUrl": "/pages/how-to/how-to-1.html#prerequisites"
+  },"56": {
+    "doc": "How to install a SIM card",
+    "title": "Step by step guide",
+    "content": " ",
+    "url": "https://docs.ai-blox.com/pages/how-to/how-to-1.html#step-by-step-guide",
+    "relUrl": "/pages/how-to/how-to-1.html#step-by-step-guide"
+  },"57": {
+    "doc": "How to install a SIM card",
+    "title": "Step 1",
+    "content": ". | Loosen the 2 hex screws with the allen key. | . ",
+    "url": "https://docs.ai-blox.com/pages/how-to/how-to-1.html#step-1",
+    "relUrl": "/pages/how-to/how-to-1.html#step-1"
+  },"58": {
+    "doc": "How to install a SIM card",
+    "title": "Step 2",
+    "content": ". | Open the module cover carefully and place it to the left side. | Make sure you don’t disconnect the antenna cables. | . ",
+    "url": "https://docs.ai-blox.com/pages/how-to/how-to-1.html#step-2",
+    "relUrl": "/pages/how-to/how-to-1.html#step-2"
+  },"59": {
+    "doc": "How to install a SIM card",
+    "title": "Step 3",
+    "content": "In case you have an CB-0200 module, you can skip this step and proceed with step 4 . This step need to be done carefully as it could damage the module. | The gigabit ethernet board need to be removed. This can be done with the flat head screwdriver. | Place the flat head in one of the holes as showed below and pull it gentley backwards to lift the board. | When the board is slightly lifted, place the flat head in the other hole and repeat the same. | Repeat this 2-3 times till the board will be completely lifted and the board can be removed by hand. | . | Move the gigabit ethernet board close to the cover as showed below. | . ",
+    "url": "https://docs.ai-blox.com/pages/how-to/how-to-1.html#step-3",
+    "relUrl": "/pages/how-to/how-to-1.html#step-3"
+  },"60": {
+    "doc": "How to install a SIM card",
+    "title": "Step 4",
+    "content": ". | Place the SIM card in front of the SIM card holder as showed below. | Make sure the SIM card contacts are pointing below and not up. | . | Slide the SIM card gently into the holder all the way to the end as showed below. | . ",
+    "url": "https://docs.ai-blox.com/pages/how-to/how-to-1.html#step-4",
+    "relUrl": "/pages/how-to/how-to-1.html#step-4"
+  },"61": {
+    "doc": "How to install a SIM card",
+    "title": "Step 5",
+    "content": ". | Place the gigabit ethernet board back and press gently on the board till the board clicks into the connector. | Afterwards, place the cover back in position. Make sure there are no cables squeezed between the cover and the BLOX enclosure. | Mount the cover again with the 2 hex screws. | . ",
+    "url": "https://docs.ai-blox.com/pages/how-to/how-to-1.html#step-5",
+    "relUrl": "/pages/how-to/how-to-1.html#step-5"
+  },"62": {
+    "doc": "How to install a SIM card",
+    "title": "How to install a SIM card",
+    "content": " ",
+    "url": "https://docs.ai-blox.com/pages/how-to/how-to-1.html",
+    "relUrl": "/pages/how-to/how-to-1.html"
+  },"63": {
+    "doc": "How to start with a BLOX",
+    "title": "How-to find start with a BLOX",
+    "content": "This page describe how you can start with a BLOX . ",
+    "url": "https://docs.ai-blox.com/pages/how-to/how-to-2.html#how-to-find-start-with-a-blox",
+    "relUrl": "/pages/how-to/how-to-2.html#how-to-find-start-with-a-blox"
+  },"64": {
+    "doc": "How to start with a BLOX",
+    "title": "Introduction",
+    "content": "We get quite often the question how to start with a BLOX. In this how-to, we will give a guideline for your first steps exploring the BLOX platform. ",
+    "url": "https://docs.ai-blox.com/pages/how-to/how-to-2.html#introduction",
+    "relUrl": "/pages/how-to/how-to-2.html#introduction"
+  },"65": {
+    "doc": "How to start with a BLOX",
+    "title": "Prerequisites",
+    "content": ". | Any BLOX with a gigabit ethernet communication module | . ",
+    "url": "https://docs.ai-blox.com/pages/how-to/how-to-2.html#prerequisites",
+    "relUrl": "/pages/how-to/how-to-2.html#prerequisites"
+  },"66": {
+    "doc": "How to start with a BLOX",
+    "title": "Step by step guide",
+    "content": " ",
+    "url": "https://docs.ai-blox.com/pages/how-to/how-to-2.html#step-by-step-guide",
+    "relUrl": "/pages/how-to/how-to-2.html#step-by-step-guide"
+  },"67": {
+    "doc": "How to start with a BLOX",
+    "title": "Step 1: finding the IP-address",
+    "content": "When the BLOX is shipped, it needs to have an DHCP server for getting a dynamic IP address. Therefore the BLOX needs to be connect to a DHCP server through the gigabit ethernet communication module? . In case you have a BLOX with an IB-03xx (4-Channel 100Mb Ethernet interface module), don’t use one of the 4 ethernet ports on this module to connect the router. Those ports aren’t configured to receive a dynamic IP address. ",
+    "url": "https://docs.ai-blox.com/pages/how-to/how-to-2.html#step-1-finding-the-ip-address",
+    "relUrl": "/pages/how-to/how-to-2.html#step-1-finding-the-ip-address"
+  },"68": {
+    "doc": "How to start with a BLOX",
+    "title": "Step 2: make a ssh connection",
+    "content": "You can make an ssh connection with the BLOX with the command below. The standard user name is: ai-blox and password: ai-blox. $ ssh ai-blox@xxx.xxx.xxx.xxx . where xxx.xxx.xxx.xxx is the IP-address found in step-1. ",
+    "url": "https://docs.ai-blox.com/pages/how-to/how-to-2.html#step-2-make-a-ssh-connection",
+    "relUrl": "/pages/how-to/how-to-2.html#step-2-make-a-ssh-connection"
+  },"69": {
+    "doc": "How to start with a BLOX",
+    "title": "Step 4: make a VNC connection",
+    "content": "To connect through VNC with the BLOX, you need to have a VNC client installed on your computer. The standard login credentials are the same as for ssh. (user: ai-blox, password: ai-blox) . ",
+    "url": "https://docs.ai-blox.com/pages/how-to/how-to-2.html#step-4-make-a-vnc-connection",
+    "relUrl": "/pages/how-to/how-to-2.html#step-4-make-a-vnc-connection"
+  },"70": {
+    "doc": "How to start with a BLOX",
+    "title": "How to start with a BLOX",
+    "content": " ",
+    "url": "https://docs.ai-blox.com/pages/how-to/how-to-2.html",
+    "relUrl": "/pages/how-to/how-to-2.html"
+  },"71": {
+    "doc": "How to",
+    "title": "How to",
+    "content": " ",
+    "url": "https://docs.ai-blox.com/pages/how-to/how-to.html",
+    "relUrl": "/pages/how-to/how-to.html"
+  },"72": {
+    "doc": "IMX219 Support",
+    "title": "IMX219 support",
+    "content": "Prerequisites . | You need a MODULE-X device installed with a JetPack version of your chose. | . Install the device tree . ToDo . ",
+    "url": "https://docs.ai-blox.com/pages/interface-modules/6-channel-mipi/imx219.html#imx219-support",
+    "relUrl": "/pages/interface-modules/6-channel-mipi/imx219.html#imx219-support"
+  },"73": {
+    "doc": "IMX219 Support",
+    "title": "IMX219 Support",
+    "content": " ",
+    "url": "https://docs.ai-blox.com/pages/interface-modules/6-channel-mipi/imx219.html",
+    "relUrl": "/pages/interface-modules/6-channel-mipi/imx219.html"
+  },"74": {
+    "doc": "BLOX",
+    "title": "BLOX",
+    "content": "Edge AI platform . ",
+    "url": "https://docs.ai-blox.com/pages/blox/",
+    "relUrl": "/pages/blox/"
+  },"75": {
+    "doc": "BLOX",
+    "title": "Table of contents",
+    "content": ". | Introduction | Extension slots | . ",
+    "url": "https://docs.ai-blox.com/pages/blox/#table-of-contents",
+    "relUrl": "/pages/blox/#table-of-contents"
+  },"76": {
+    "doc": "BLOX",
+    "title": "Introduction",
+    "content": "BLOX is an edge AI platform developed to speed up edge AI application rollout. With this platform, AI-BLOX wants to help AI software companies in developing new edge AI applications. By using the BLOX platform, there is no need to do custom hardware development from scratch. The BLOX platform is a flexible hardware platform which has a lot of options to full fill as much applications as possible. First of all, the BLOX platform support following Jetson modules in the same form factor: . | Jetson Nano | Jetson TX2 NX | Jetson Xavier NX | . This allows the user to choose the right processor power for his application without changing the system as you see with our competitors. It’s always possible to upgrade or even downgrade the processor power if the application is asking for this. The second benefit for using the MODULE-X is the flexibility in interfacing and communication. The BLOX has 2 extension slots which allows the user to add extra functionality to the BLOX device. In the next chapter, the extension slots are explained. The enclosure of the BLOX is an anodised aluminium heat sink. This makes the BLOX very robust and passive cooled ideal for industrial tough environments. Depending on the extension modules used, the BLOX can be delivered in an IP67 sealing which makes the module water and dust proof. ",
+    "url": "https://docs.ai-blox.com/pages/blox/#introduction",
+    "relUrl": "/pages/blox/#introduction"
+  },"77": {
+    "doc": "BLOX",
+    "title": "Extension slots",
+    "content": "The BLOX has 2 extension slots: . | Interface BLOX slot | Communication BLOX slot | . The interface BLOX slot is used to extend the BLOX with extra interface options such as MIPI, GMSL and ethernet. With those interface modules, the BLOX can connect almost every sensor available on the market. The comm module slot is used to add communication options to the BLOX such as Gigabit Ethernet, WiFi and/or LTE. In the drawing below, you will find the 2 slots. The interface slot has 2 extension connectors, the comm slot has only one extension connector. ",
+    "url": "https://docs.ai-blox.com/pages/blox/#extension-slots",
+    "relUrl": "/pages/blox/#extension-slots"
+  },"78": {
+    "doc": "Home",
+    "title": "AI-BLOX documentation",
+    "content": ". ",
+    "url": "https://docs.ai-blox.com/#ai-blox-documentation",
+    "relUrl": "/#ai-blox-documentation"
+  },"79": {
+    "doc": "Home",
+    "title": "Welcome",
+    "content": "Welcome to our documentation page of AI-BLOX. Here you will find all documents related to our BLOX edge platform. ",
+    "url": "https://docs.ai-blox.com/#welcome",
+    "relUrl": "/#welcome"
+  },"80": {
+    "doc": "Home",
+    "title": "Home",
+    "content": " ",
+    "url": "https://docs.ai-blox.com/",
+    "relUrl": "/"
+  },"81": {
+    "doc": "Interface Modules",
+    "title": "Interface Module",
+    "content": "This pages shows the available interface module. | Order Code | Reference | Description | . | [IB-0100](IB-0100.html) | 10.40.0100 | 6-Channel MIPI interface module | . | [IB-0200](IB-0200.html) | 10.40.0200 | 4-Channel USB3.0 with 4-DO and 4-DI interface module | . | [IB-1200](IB-1200.html) | 10.40.1200 | 4-Channel USB3.0 with 4-DO and 4-DI interface module, IP67 | . ",
+    "url": "https://docs.ai-blox.com/pages/interface-modules/interface-module.html#interface-module",
+    "relUrl": "/pages/interface-modules/interface-module.html#interface-module"
+  },"82": {
+    "doc": "Interface Modules",
+    "title": "Interface Modules",
+    "content": " ",
+    "url": "https://docs.ai-blox.com/pages/interface-modules/interface-module.html",
+    "relUrl": "/pages/interface-modules/interface-module.html"
+  },"83": {
+    "doc": "JetPack Support",
+    "title": "JetPack support overview",
+    "content": " ",
+    "url": "https://docs.ai-blox.com/pages/blox/kernel/jetpack.html#jetpack-support-overview",
+    "relUrl": "/pages/blox/kernel/jetpack.html#jetpack-support-overview"
+  },"84": {
+    "doc": "JetPack Support",
+    "title": "JetPack 4.6.1",
+    "content": "NVIDIA Product Pages . | JetPack SDK 4.6.1 RELEASE PAGE | L4T R32.7.1 Release Page | . AI-BLOX Product Support . | Product | Jetson | Supported | . | MX1010-1 | Nano | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.6.1 Support]) | . | MX1010-2 | Nano | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.6.1 Support]) | . | MX1020-1 | TX2 NX | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.6.1 Support]) | . | MX1020-2 | TX2 NX | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.6.1 Support]) | . | MX1030-1 | Xavier NX 8Gb | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.6.1 Support]) | . | MX1030-2 | Xavier NX 8Gb | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.6.1 Support]) | . | MX1030-3 | Xavier NX 16Gb | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.6.1 Support]) | . | MX1030-4 | Xavier NX 16Gb | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.6.1 Support]) | . ",
+    "url": "https://docs.ai-blox.com/pages/blox/kernel/jetpack.html#jetpack-461",
+    "relUrl": "/pages/blox/kernel/jetpack.html#jetpack-461"
+  },"85": {
+    "doc": "JetPack Support",
+    "title": "JetPack 4.6",
+    "content": "NVIDIA Product Pages . | JetPack SDK 4.6 RELEASE PAGE | L4T R32.6.1 Release Page | . AI-BLOX Product Support . | Product | Jetson | Supported | . | MX1010-1 | Nano | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.6 Support]) | . | MX1010-2 | Nano | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.6 Support]) | . | MX1020-1 | TX2 NX | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.6 Support]) | . | MX1020-2 | TX2 NX | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.6 Support]) | . | MX1030-1 | Xavier NX | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.6 Support]) | . | MX1030-2 | Xavier NX | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.6 Support]) | . ",
+    "url": "https://docs.ai-blox.com/pages/blox/kernel/jetpack.html#jetpack-46",
+    "relUrl": "/pages/blox/kernel/jetpack.html#jetpack-46"
+  },"86": {
+    "doc": "JetPack Support",
+    "title": "JetPack 4.5.1",
+    "content": "NVIDIA Product Pages . | JetPack SDK 4.5.1 Archive | L4T R32.5.1 Release Page | . AI-BLOX Product Support . | Product | Jetson | Supported | . | MX1010-1 | Nano | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.5.1 Support]) | . | MX1010-2 | Nano | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.5.1 Support]) | . | MX1020-1 | TX2 NX | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.5.1 Support]) | . | MX1020-2 | TX2 NX | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.5.1 Support]) | . | MX1030-1 | Xavier NX | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.5.1 Support]) | . | MX1030-2 | Xavier NX | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.5.1 Support]) | . ",
+    "url": "https://docs.ai-blox.com/pages/blox/kernel/jetpack.html#jetpack-451",
+    "relUrl": "/pages/blox/kernel/jetpack.html#jetpack-451"
+  },"87": {
+    "doc": "JetPack Support",
+    "title": "JetPack 4.5",
+    "content": "NVIDIA Product Pages . | JetPack SDK 4.5 Archive | L4T R32.5 Release Page | . AI-BLOX Product Support . | Product | Jetson | Supported | . | MX1010-1 | Nano | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.5 Support]) | . | MX1010-2 | Nano | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.5 Support]) | . | MX1020-1 | TX2 NX | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.5 Support]) | . | MX1020-2 | TX2 NX | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.5 Support]) | . | MX1030-1 | Xavier NX | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.5 Support]) | . | MX1030-2 | Xavier NX | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.5 Support]) | . ",
+    "url": "https://docs.ai-blox.com/pages/blox/kernel/jetpack.html#jetpack-45",
+    "relUrl": "/pages/blox/kernel/jetpack.html#jetpack-45"
+  },"88": {
+    "doc": "JetPack Support",
+    "title": "JetPack 4.4.1",
+    "content": "NVIDIA Product Pages . | JetPack SDK 4.4.1 Archive | L4T R32.4.4 Release Page | . AI-BLOX Product Support . | Product | Jetson | Supported | . | MX1010-1 | Nano | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4.1 Support]) | . | MX1010-2 | Nano | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4.1 Support]) | . | MX1020-1 | TX2 NX | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4.1 Support]) | . | MX1020-2 | TX2 NX | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4.1 Support]) | . | MX1030-1 | Xavier NX | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4.1 Support]) | . | MX1030-2 | Xavier NX | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4.1 Support]) | . ",
+    "url": "https://docs.ai-blox.com/pages/blox/kernel/jetpack.html#jetpack-441",
+    "relUrl": "/pages/blox/kernel/jetpack.html#jetpack-441"
+  },"89": {
+    "doc": "JetPack Support",
+    "title": "JetPack 4.4",
+    "content": "NVIDIA Product Pages . | JetPack SDK 4.4 Archive | L4T R32.4.3 Release Page | . AI-BLOX Product Support . | Product | Jetson | Supported | . | MX1010-1 | Nano | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4 Support]) | . | MX1010-2 | Nano | yes | . | MX1020-1 | TX2 NX | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4 Support]) | . | MX1020-2 | TX2 NX | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4 Support]) | . | MX1030-1 | Xavier NX | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4 Support]) | . | MX1030-2 | Xavier NX | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4 Support]) | . ",
+    "url": "https://docs.ai-blox.com/pages/blox/kernel/jetpack.html#jetpack-44",
+    "relUrl": "/pages/blox/kernel/jetpack.html#jetpack-44"
+  },"90": {
+    "doc": "JetPack Support",
+    "title": "JetPack 4.4 Developer Preview",
+    "content": "NVIDIA Product Pages . | JetPack SDK 4.4 DP Archive | L4T R32.4.2 Release Page | . AI-BLOX Product Support . | Product | Jetson | Supported | . | MX1010-1 | Nano | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4 Developer Preview Support]) | . | MX1010-2 | Nano | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4 Developer Preview Support]) | . | MX1020-1 | TX2 NX | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4 Developer Preview Support]) | . | MX1020-2 | TX2 NX | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4 Developer Preview Support]) | . | MX1030-1 | Xavier NX | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4 Developer Preview Support]) | . | MX1030-2 | Xavier NX | [Ask](mailto:support@ai-blox.com?subject=[JetPack 4.4 Developer Preview Support]) | . ",
+    "url": "https://docs.ai-blox.com/pages/blox/kernel/jetpack.html#jetpack-44-developer-preview",
+    "relUrl": "/pages/blox/kernel/jetpack.html#jetpack-44-developer-preview"
+  },"91": {
+    "doc": "JetPack Support",
+    "title": "JetPack Support",
+    "content": " ",
+    "url": "https://docs.ai-blox.com/pages/blox/kernel/jetpack.html",
+    "relUrl": "/pages/blox/kernel/jetpack.html"
+  },"92": {
+    "doc": "Kernel Support",
+    "title": "Device tree",
+    "content": "Each BLOX has it’s own device tree. The table below shows the root device tree. | Device | Filename | Description | . | MX1010-1 | tegra210-p3448-0002-MX1010-1-***ver***.dts | BLOX, Jetson Nano | . | MX1010-2 | tegra210-p3448-0002-MX1010-2-***ver***.dts | BLOX, Jetson Nano, 7\" touch screen | . | MX1020-1 |   | BLOX, Jetson TX2 NX | . | MX1020-2 |   | BLOX, Jetson TXZ NX, 7\" touch screen | . | MX1030-1 | tegra194-p3668-0001-MX1030-1-***ver***.dts | BLOX, Jetson Xavier NX | . | MX1030-2 | tegra194-p3668-0001-MX1030-2-***ver***.dts | BLOX, Jetson Xavier NX, 7\" touch screen | . ",
+    "url": "https://docs.ai-blox.com/pages/blox/kernel/kernel.html#device-tree",
+    "relUrl": "/pages/blox/kernel/kernel.html#device-tree"
+  },"93": {
+    "doc": "Kernel Support",
+    "title": "Jetson Linux Toolchain",
+    "content": "NVIDIA speciffies the Linaro gcc 7.3.1 2018.05 aarch toolchain. ",
+    "url": "https://docs.ai-blox.com/pages/blox/kernel/kernel.html#jetson-linux-toolchain",
+    "relUrl": "/pages/blox/kernel/kernel.html#jetson-linux-toolchain"
+  },"94": {
+    "doc": "Kernel Support",
+    "title": "Downloading the Toolchain",
+    "content": "http://releases.linaro.org/components/toolchain/binaries/7.3-2018.05/aarch64-linux-gnu/gcc-linaro-7.3.1-2018.05-x86_64_aarch64-linux-gnu.tar.xz . ",
+    "url": "https://docs.ai-blox.com/pages/blox/kernel/kernel.html#downloading-the-toolchain",
+    "relUrl": "/pages/blox/kernel/kernel.html#downloading-the-toolchain"
+  },"95": {
+    "doc": "Kernel Support",
+    "title": "Extracting the Toolchain",
+    "content": "$ mkdir $HOME/l4t-gcc $ cd $HOME/l4t-gcc $ tar xf gcc-linaro-7.3.1-2018.05-x86_64_aarch64-linux-gnu.tar.xz . ",
+    "url": "https://docs.ai-blox.com/pages/blox/kernel/kernel.html#extracting-the-toolchain",
+    "relUrl": "/pages/blox/kernel/kernel.html#extracting-the-toolchain"
+  },"96": {
+    "doc": "Kernel Support",
+    "title": "Setting the CROSS_COMPILE Environment Variable",
+    "content": "$ export CROSS_COMPILE=$HOME/l4t-gcc/gcc-linaro-7.3.1-2018.05-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu- . ",
+    "url": "https://docs.ai-blox.com/pages/blox/kernel/kernel.html#setting-the-cross_compile-environment-variable",
+    "relUrl": "/pages/blox/kernel/kernel.html#setting-the-cross_compile-environment-variable"
+  },"97": {
+    "doc": "Kernel Support",
+    "title": "Installing curse lib",
+    "content": "$ sudo apt-get install libncurses-dev . ",
+    "url": "https://docs.ai-blox.com/pages/blox/kernel/kernel.html#installing-curse-lib",
+    "relUrl": "/pages/blox/kernel/kernel.html#installing-curse-lib"
+  },"98": {
+    "doc": "Kernel Support",
+    "title": "Kernel Support",
+    "content": " ",
+    "url": "https://docs.ai-blox.com/pages/blox/kernel/kernel.html",
+    "relUrl": "/pages/blox/kernel/kernel.html"
+  },"99": {
+    "doc": "Stress test",
+    "title": "Stress Test",
+    "content": "How to push the MODULE-X to the limits? . ",
+    "url": "https://docs.ai-blox.com/pages/blox/hardware/stress-test.html#stress-test",
+    "relUrl": "/pages/blox/hardware/stress-test.html#stress-test"
+  },"100": {
+    "doc": "Stress test",
+    "title": "Introduction",
+    "content": "The MODULE-X is passive cooled. This means that the device doesn’t have a fan to cool down. The device is cooled down with natural airflow flowing over the well designed heat sink. At least, that’s the theory 😅. In this chapter, we will explain how you can stress the MODULE-X to the limits and verify if the module withstand the temperature specs. ",
+    "url": "https://docs.ai-blox.com/pages/blox/hardware/stress-test.html#introduction",
+    "relUrl": "/pages/blox/hardware/stress-test.html#introduction"
+  },"101": {
+    "doc": "Stress test",
+    "title": "Prerequisites",
+    "content": ". | You need one of the following modules: . | IMX1010-1, MODULE-X with Jetson Nano | IMX1020-1, MODULE-X with Jetson TX2 NX | IMX1030-1, MODULE-X with Jetson Xavier NX | . | . ",
+    "url": "https://docs.ai-blox.com/pages/blox/hardware/stress-test.html#prerequisites",
+    "relUrl": "/pages/blox/hardware/stress-test.html#prerequisites"
+  },"102": {
+    "doc": "Stress test",
+    "title": "Install tools",
+    "content": ". | Install the stress tool for CPU stressing: $ sudo apt-get update $ sudo apt-get install -y stress . | Install CUDA necessary to stress the GPU, there are 2 options: . | through the NVIDIA software SDK | through deb installation package, this procedure is showed below for JetPack 4.6 | . | . $ wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/sbsa/cuda-ubuntu1804.pin $ sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600 $ sudo apt-get update wget https://repo.download.nvidia.com/jetson/common/pool/main/c/cuda-toolkit-10-2/cuda-toolkit-10-2_10.2.460-1_arm64.deb sudo apt install ./cuda-toolkit-10-2_10.2.460-1_arm64.deb . | Build the matrixMul sample app: | . $ cd /usr/local/cuda/samples/0_Simple/matrixMul $ sudo make . ",
+    "url": "https://docs.ai-blox.com/pages/blox/hardware/stress-test.html#install-tools",
+    "relUrl": "/pages/blox/hardware/stress-test.html#install-tools"
+  },"103": {
+    "doc": "Stress test",
+    "title": "Run test",
+    "content": "For getting the maximum performance out of the Jetson Modules, three things need to be done: . | Chose your power mode for the test | Run the GPU at maximum performance | Run the CPUs at maximum performance | . It’s good to have the test run for several hours on a constant room temperature. This allows the system to settle down at the maximum temperature. Choosing the power mode depends of which module you are testing. An overview of the available power modes can be found in the Power Mode section of this page. cd . $ sudo /usr/sbin/nvpmodel -m &lt;x&gt; . Where &lt;x&gt; is the power mode. The maximum power modes are: . | Jetson Nano @10W: nvpmodel -m 0 | Jetson TX2 NX @15W: nvpmodel -m 3 | Jetson Xavier NX @15W: nvpmodel -m 2 | Jetson Xavier NX @20W: nvpmodel -m 8 only available with JetPack &gt;=4.6 | . Run the GPU at max performance: . $ while :; do /usr/local/cuda/samples/0_Simple/matrixMul/matrixMul -wA=6400 -hA=640 -wB=640 - hB=6400; done . Run the CPUs at max performance: . $ stress -c $(nproc) . Monitor the results: . $ tegrastats RAM 1802/7772MB (lfb 357x4MB) SWAP 0/3886MB (cached 0MB) CPU [100%@1420,100%@1420,100%@1420,100%@1420,100%@1420,100%@1420] EMC_FREQ 0% GR3D_FREQ 99% AO@42.5C GPU@44.5C PMIC@100C AUX@43.5C CPU@44.5C thermal@44.25C VDD_IN 14703/14683 VDD_CPU_GPU_CV 10874/10893 VDD_SOC 1405/1405 RAM 1802/7772MB (lfb 357x4MB) SWAP 0/3886MB (cached 0MB) CPU [100%@1420,100%@1420,100%@1420,100%@1420,100%@1420,100%@1420] EMC_FREQ 0% GR3D_FREQ 99% AO@42.5C GPU@45C PMIC@100C AUX@43C CPU@44.5C thermal@43.9C VDD_IN 14703/14690 VDD_CPU_GPU_CV 10874/10887 VDD_SOC 1405/1405 RAM 1802/7772MB (lfb 357x4MB) SWAP 0/3886MB (cached 0MB) CPU [100%@1420,100%@1420,100%@1420,100%@1420,100%@1420,100%@1420] EMC_FREQ 0% GR3D_FREQ 99% AO@42.5C GPU@45C PMIC@100C AUX@43.5C CPU@45C thermal@44.05C VDD_IN 14664/14683 VDD_CPU_GPU_CV 10913/10893 VDD_SOC 1405/1405 RAM 1802/7772MB (lfb 356x4MB) SWAP 0/3886MB (cached 0MB) CPU [100%@1420,100%@1420,100%@1420,100%@1420,100%@1420,100%@1420] EMC_FREQ 0% GR3D_FREQ 99% AO@42.5C GPU@44.5C PMIC@100C AUX@43.5C CPU@45C thermal@44.4C VDD_IN 14664/14679 VDD_CPU_GPU_CV 10913/10897 VDD_SOC 1405/140 . ",
+    "url": "https://docs.ai-blox.com/pages/blox/hardware/stress-test.html#run-test",
+    "relUrl": "/pages/blox/hardware/stress-test.html#run-test"
+  },"104": {
+    "doc": "Stress test",
+    "title": "Results",
+    "content": "Jetson Nano . Jetson Nano in 10W mode, room temperature 20°C. Results: . | Total power consumption: 17,4W | CPU temp.: 48,0°C, max temp.: 97°C (delta: 49°) | GPU temp.: 46,0°C, max temp.: 97°C (delta: 51°C) | Max. heat sink temp.: 24,9°C | . The max ambient temp. in this mode is: 65°C (20,0°C + 49,0° caped to 65°C) . RAM 2020/3964MB (lfb 19x4MB) SWAP 43/1982MB (cached 1MB) CPU [100%@1479,100%@1479,100%@1479,100%@1479] EMC_FREQ 0% GR3D_FREQ 99% PLL@41.5C CPU@48C PMIC@100C GPU@63C AO@54.5C thermal@48.25C POM_5V_GPU 8949/8742 POM_5V_IN 3227/3086 POM_5V_CPU 3148/3134 RAM 2020/3964MB (lfb 19x4MB) SWAP 43/1982MB (cached 1MB) CPU [100%@1479,100%@1479,100%@1479,100%@1479] EMC_FREQ 0% GR3D_FREQ 83% PLL@42C CPU@48C PMIC@100C GPU@46C AO@53.5C thermal@48C POM_5V_GPU 8791/8742 POM_5V_IN 3075/3086 POM_5V_CPU 3109/3134 RAM 2020/3964MB (lfb 19x4MB) SWAP 43/1982MB (cached 1MB) CPU [100%@1479,100%@1479,100%@1479,100%@1479] EMC_FREQ 0% GR3D_FREQ 99% PLL@42C CPU@48C PMIC@100C GPU@46C AO@54C thermal@48C POM_5V_GPU 8633/8742 POM_5V_IN 2956/3086 POM_5V_CPU 3148/3134 . Jetson TX2 NX . T.B.D. Xavier NX . Jetson Xavier NX in 15W mode, room temperature 20°C. Results: . | Total power consumption: 17,4W | CPU temp.: 53,0°C, max temp.: 90,5°C (delta: 37,5°) | GPU temp.: 53,5°C, max temp.: 91,5°C (delta: 38,0°C) | AUX temp.: 51,0°C, max temp.: 90,0°C (delta: 39,0°C) | Max. heat sink temp.: 41,4°C | . The max ambient temp. in this mode is: 57,5°C (20,0°C + 37,5°) . RAM 1748/7772MB (lfb 377x4MB) SWAP 0/3886MB (cached 0MB) CPU [100%@1420,100%@1420,100%@1420,100%@1420,100%@1420,100%@1420] EMC_FREQ 0% GR3D_FREQ 99% AO@50.5C GPU@53C PMIC@100C AUX@51C CPU@53C thermal@52.35C VDD_IN 12221/13950 VDD_CPU_GPU_CV 8812/10241 VDD_SOC 1333/1412 RAM 1749/7772MB (lfb 377x4MB) SWAP 0/3886MB (cached 0MB) CPU [100%@1420,100%@1420,100%@1420,100%@1420,100%@1420,100%@1420] EMC_FREQ 0% GR3D_FREQ 99% AO@51C GPU@53.5C PMIC@100C AUX@51C CPU@53C thermal@52.2C VDD_IN 14664/13950 VDD_CPU_GPU_CV 10874/10241 VDD_SOC 1442/1412 RAM 1749/7772MB (lfb 377x4MB) SWAP 0/3886MB (cached 0MB) CPU [100%@1420,100%@1420,100%@1420,100%@1420,100%@1420,100%@1420] EMC_FREQ 0% GR3D_FREQ 99% AO@51C GPU@53.5C PMIC@100C AUX@51C CPU@53C thermal@52.35C VDD_IN 14664/13951 VDD_CPU_GPU_CV 10874/10241 VDD_SOC 1444/1412 . Jetson Xavier NX in 20W mode, room temperature 20°C . Results: . | Total power consumption: 19,2W | CPU temp.: 55,0°C, max temp.: 90,5°C (delta: 35,5°) | GPU temp.: 56,0°C, max temp.: 91,5°C (delta: 35,5°C) | AUX temp.: 55,0°C, max temp.: 90,0°C (delta: 40,0°C) | Max. heat sink temp.: 43,1°C | . The max ambient temp. in this mode is: 55,5°C (20,0°C + 35,5°) . RAM 6774/7773MB (lfb 159x4MB) SWAP 608/3887MB (cached 46MB) CPU [100%@1420,100%@1420,100%@1420,100%@1420,100%@1420,100%@1420] EMC_FREQ 0% GR3D_FREQ 99% AO@54.5C GPU@57C PMIC@50C AUX@55C CPU@56C thermal@55.75C RAM 6774/7773MB (lfb 159x4MB) SWAP 608/3887MB (cached 46MB) CPU [100%@1420,100%@1420,100%@1420,100%@1420,100%@1420,100%@1420] EMC_FREQ 0% GR3D_FREQ 99% AO@54.5C GPU@56.5C PMIC@50C AUX@54.5C CPU@56C thermal@55.75C RAM 6774/7773MB (lfb 159x4MB) SWAP 608/3887MB (cached 46MB) CPU [100%@1420,100%@1420,100%@1420,100%@1420,100%@1420,100%@1420] EMC_FREQ 0% GR3D_FREQ 99% AO@54.5C GPU@56.5C PMIC@50C AUX@55C CPU@56C thermal@55.75C . ",
+    "url": "https://docs.ai-blox.com/pages/blox/hardware/stress-test.html#results",
+    "relUrl": "/pages/blox/hardware/stress-test.html#results"
+  },"105": {
+    "doc": "Stress test",
+    "title": "Power Mode overview",
+    "content": "Jetson Nano . Jetson TX2 NX . Jetson Xavier . ",
+    "url": "https://docs.ai-blox.com/pages/blox/hardware/stress-test.html#power-mode-overview",
+    "relUrl": "/pages/blox/hardware/stress-test.html#power-mode-overview"
+  },"106": {
+    "doc": "Stress test",
+    "title": "Stress test",
+    "content": " ",
+    "url": "https://docs.ai-blox.com/pages/blox/hardware/stress-test.html",
+    "relUrl": "/pages/blox/hardware/stress-test.html"
+  }
+}
