@@ -22,6 +22,12 @@ You can run jekyll locally with following command:
 $ bundle exec jekyll serve
 ```
 
+If you encounter " `require': cannot load such file -- webrick (LoadError)"
+You will need to add webrick to the bundle
+
+```bash
+$ bundle add webrick
+```
 
 
 ## Publish on github pages
