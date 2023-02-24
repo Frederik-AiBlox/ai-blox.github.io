@@ -15,5 +15,7 @@ This pages shows the available communication modules.
 |:-----------------------:|:----------:|:--------------------------------------------------------------|
 | [CB-0010](CB-0010.html) | 10.50.0010 | Gigabit ethernet communication module                         |
 | [CB-0011](CB-0011.html) | 10.50.0011 | Gigabit ethernet communication module with AcroPack interface |
+| [CB-0100](CB-0100.html) | 10.50.0100 | WiFi + BT communication module                                |
+| [CB-0110](CB-0110.html) | 10.50.0100 | WiFi + BT + Gigabit ethernet communication module             |
 | [CB-0200](CB-0200.html) | 10.50.0200 | LTE Cat. 4 cellular communication module                      |
 | [CB-0210](CB-0210.html) | 10.50.0210 | Gigabit ethernet + LTE Cat. 4 cellular communication module   |
