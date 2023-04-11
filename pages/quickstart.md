@@ -25,66 +25,43 @@ We already have flashed the blox device and SD-card with Ubuntu version 18.04.6 
 - a network connected computer with perferrable Ubuntu, Windows could do the trick too...
 - a power cable
 
-# Step 1: Connect the programmer
+# Step 1: Connect the Ai-Blox programmer & Ethernet
 
 Before powering on the Blox, the programmer needs to be connected. The connection pads on the PCB can be found underneath the communication module.
 
-1. Remove the red cover of the communication module
+## Remove the red cover of the communication module
 
 For removing the communication module cover, you need to unscrew the 2 screws as showed below with an alley key.
+![Blox-Device](/assets/images/pages/getting-started/Blox-device-screws.png)
 
-If there is a WiFi or LTE modem mounted, you will have to unscrew this also. 
+If there is a WiFi or LTE modem mounted, you will have to unscrew this also and takeout the modem module. 
 
-2. Connecting the Programmer
+## Connect the Programmer
 
-Connect the  
+On the black board is a 5x2 pad configuration, which is the connector for the programmer tag connector. There are 3 small holes, 1 above and 2 below that mark the orientation of the connector. The tag connector has metalic colored pins that need to fit in these 3 holes. Make sure to hold it in the right orentation. 
+When placed correctly, give it a soft push, the metalic pins will sink into the board and the golden pins need to touch the pads. To make sure, you will need to an elastic band over keep the golden pins puhsed down to the pads.  
 
+Below is the connector orientation.
+![Connecting-the-programmer](/assets/images/pages/getting-started/Programming_connector.png)
 
+Blox programmer connector is kept in place with an elastic band. 
+![Connected-programmer](/assets/images/pages/getting-started/Blox-Programmer.png)
 
-# Step 1: Power on
+Now you also need to connect the programmer USB-A to USB-B connector to your computer. 
 
-Before powering the device, it is convenient to first connect your Ethernet cable to the GigE Ethernet of the red communication module (CB-0010, CB-0110 or CB). By default the Blox Ethernet is configured to receive a dynamic IP address from the DHCP server on your network. 
+## Connect the Ethernet Cable
 
+To gain an IP address, connect an Ethernet cable to the RJ45 of the communcation module.
 
-![Blox-EthernetConnected](/assets/images/pages/getting-started/Blox-Eth-Connected.png)
+![Connected-Programmer-Ethernet](/assets/images/pages/getting-started/Blox-Programmer-Ethernet.png)
 
 *If your blox device has the CB-0310 (4 PoE Ethernet) green communication module, note that these are not configured by default to receive a dynamic IP address. Do not use these ports to conenct to your network.*
 
-Plug in the Power supply connector. The boot time of the blox is around 30s. The RJ45 status leds will indicate that there is a link (left LED) and activity (right LED).
-
-
-
-# Step 2: Find the IP address
-
-
-To be able to connect to the Blox over ssh or VNC, the IP address has be to be found. The blox will have received a dynamic IP address from the DHCP server on your network. 
-There are several options to discover the IP address: network scanning with nmap and arp or using the Blox Programmer USB to Serail Port.   
-
-## Network scanning using nmap
-
-Nmap or network mapper is an open-source tool to scan a network. It can be used to retreive the IP addresses of devices on the network. 
-
-In the command below, replace the x with the subnet your computer is in and make sure the Blox will recieve a IP address in that same subnet.
-```bash
-$ sudo nmap -sn 192.168.x.0/24
-```
-
-Nmap will output a list of IP addresses. To find your Blox device look for the `tegra-ubuntu`.
-
-If nmap is not recognised, then you will need to install it first.
-```bash 
-$ sudo apt update
-$ sudo apt install nmap
-```
-
-## 
-
-
-### Blox programmer serial console
+# Step 2: Setup the serial connection
 
 The Blox Programmer device contains a USB to Serial Port Bridge and can be used to connect to the serial console of the Blox platform. 
 
-#### Ubuntu
+## Ubuntu
 
 Connect the programmer's USB cable to your computer. Connect the tag connector the Blox. 
 
@@ -108,9 +85,48 @@ Start the serial port
 ```
 $ sudo screen /dev/ttyUSB0 115200
 ```
-The console screen will be cleared. Now power on the Blox. 
+The console screen will be cleared. 
 
-From the moment the blox is powered, the boot log will appear in the terminal running screen. 
+## Windows
+
+To use the USB to UART Bridge of the programmer on Windows, the Silicon Labs CP2010x Universal Driver needs to be installed.
+
+Download the [CP210x Universal Windows driver](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers?tab=downloads)
+
+![Driver-download-page](/assets/images/pages/getting-started/SIlabs-driver-download.png)
+
+Once the driver download is finished and the programmer is connected to your laptop, go to device manager.
+Under other device, the CP2102N USB to UART Bridge Controller will appear.
+<p align="center">
+<img src="/assets/images/pages/getting-started/No-Silabs-Driver-DeviceManager.png" width="300">
+</p>
+Now right click and select update driver. 
+<p align="center">
+<img src="/assets/images/pages/getting-started/Update-Silabs-driver.png" width="200">
+</p>
+Manually browse to the folder where you have downloaded the driver and select it.  
+<p align="center">
+<img src="/assets/images/pages/getting-started/Driver-Update-Browse.png" width="500">
+</p>
+Once the driver is installed, the programmer will appear as Silicon Labs CP210x USB to UART Bridge
+<p align="center">
+<img src="/assets/images/pages/getting-started/DeviceManager-SIlabs-COMPort.png" width="500">
+</p>
+
+Now you can use this COM port number in Putty to start the serial connection. 
+Select the COMx as displayed in the Device Manager and set the Speed to 115200. 
+
+<p align="center">
+<img src="/assets/images/pages/getting-started/Putty-Serial-Settings.png" width="500">
+</p>
+
+Click on open to start the serial connection. 
+
+# Step 3: Power on
+
+Now the serial port is opened, plug in the Power supply connector.  
+
+From the moment the blox is powered, the boot log will appear in the terminal screen. Boot time is around 30s.
 The boot log will stop to ask you to login.
 
 ```bash
@@ -121,47 +137,80 @@ Now login with `ai-blox`
 ```
 Password:
 ```
-Password is `
+Password is `ai-blox`
 
+On successful login the information and prompt will appear. 
+```bash
+Last login: Tue Apr 11 13:33:46 UTC 2023 on ttyTCU0
+Welcome to Ubuntu 18.04.6 LTS (GNU/Linux 4.9.253+ aarch64)
 
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+This system has been minimized by removing packages and content that are
+not required on a system that users do not log into.
 
+To restore this content, you can run the 'unminimize' command.
 
+305 updates can be applied immediately.
+260 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
 
+ai-blox@tegra-ubuntu:~$
+```
 
+# Step 4: Find the IP address
 
+To find the IP address use the `ifconfig | grep inet` in the serial console.
+The IP address will appear on the second line of the output of the command.
+```bash
+ai-blox@tegra-ubuntu:~$ ifconfig | grep inet
+        inet 172.17.0.1  netmask 255.255.0.0  broadcast 172.17.255.255
+        inet 192.168.1.53  netmask 255.255.255.0  broadcast 192.168.1.255
 
+```
 
-Power on the Blox.
+# Step 5: Connect through SSH
 
+Now the IP address is known, we can connect on the network over SSH. 
 
+### Ubuntu
 
+```bash
+$ ssh ai-blox@xx.xx.xx.xx
+```
+Where the `xx.xx.xx.xx` is the IP address retreived in the previous step and the user will be `ai-blox`
 
+On the first time connection, you will have to answer `yes` in the console on question regarding the certificate. 
 
+Login with the password `ai-blox`
 
+### Windows
 
+If you click on Putty you can start a new SSH session
 
-- programmer device => login => command  
-- 
-$ ifconfig | grep inet
-    inet 172.17.0.1  netmask 255.255.0.0  broadcast 172.17.255.255
-    inet 192.168.1.53  netmask 255.255.255.0  broadcast 192.168.1.255
-    inet6 fe80::7bbf:599a:3f35:6a6d  prefixlen 64  scopeid 0x20<link>
-    inet6 2a02:a03f:6997:a000:1d20:bc8b:30a8:106  prefixlen 64  scopeid 0x0<global>
-    inet6 2a02:a03f:6997:a000:6ea8:c046:e67a:9cf9  prefixlen 64  scopeid 0x0<global>
-    inet 127.0.0.1  netmask 255.0.0.0
-    inet6 ::1  prefixlen 128  scopeid 0x10<host>
+<p align="center">
+<img src="/assets/images/pages/getting-started/Putty-SSH.png" width="400">
+</p>
 
+Login with username: `ai-blox` and password `ai-blox`.
 
-Using the programmer with Windows => link to install of Windows driver
+# Step 6: Connect with a VNC client
 
+A VNC server is also enabled on the Blox device and can be used to connect with a VNC client. 
+On Ubuntu you could use the `Remote Desktop Viewer` ([Vinagre](https://help.ubuntu.com/community/Vinagre)) which is installed by defalt. Windows users could install and use (RemoteRipple)[https://remoteripple.com/] or any other availbel VNC client. 
 
+To use the VNC client, use the known IP address, login: `ai-blox` and password `ai-blox`
 
+# Recommendations
 
+To enhance security you will need to change the default password as a minimum. If you have changed the password, make sure that you have stored it somewhere to retrieve it later on. 
 
-
-
-
-
-
-
-
+```bash
+ai-blox@tegra-ubuntu:~$ passwd
+Changing password for ai-blox.
+(current) UNIX password:
+Enter new UNIX password:
+Retype new UNIX password:
+passwd: password updated successfully
+```
