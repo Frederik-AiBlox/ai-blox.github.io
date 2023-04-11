@@ -1,16 +1,16 @@
 ---
 layout: default
-title: Quickstart
+title: Getting Started
 nav_order: 1
 has_children: true
 has_toc: true
 ---
 
-# Quickstart
+# Getting Started
 
 # Intro
 
-To get up and running wiht your Ai-Blox device, we will first connect to it over ssh or a VNC client.
+To get up and running wiht your Ai-Blox device, the instructions below will guide you how to connect to your blox over serial prompt, retrieve the IP address and connect with SSH or a VNC client to your Blox. The instructions are written for both Ubuntu and Windows. 
 
 **What is included in the box?**
 - an Ai-Blox device with pre-mounted Communication module (Green) and Interface module (Red) of your preferrence
