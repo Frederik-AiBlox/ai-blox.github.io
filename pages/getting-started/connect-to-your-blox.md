@@ -1,42 +1,29 @@
 ---
 layout: default
-title: Getting Started
-nav_order: 2
+title: Connect to your Blox
+parent: Getting Started
+nav_order: 1
 has_children: false
 has_toc: false
 ---
+# Connect to your Blox
 
-# Getting Started
+---
 
-# Intro
+The steps below explain how to retreive the IP address of your Blox and connect to it over ssh and VNC. 
 
-To get up and running wiht your Ai-Blox device, the instructions below will guide you how to connect to your blox over serial prompt, retrieve the IP address and connect with SSH or a VNC client to your Blox. The instructions are written for both Ubuntu and Windows. 
-
-**What is included in the box?**
-- an Ai-Blox device with pre-mounted Communication module (Green) and Interface module (Red) of your preferrence
-- Blox power supply
-- Ai-Blox programmer
-
-We already have flashed the blox device and SD-card with Ubuntu version 18.04.6 LTS and JetPack 4.6.1. The SD card is already placed into its holder in the device.
-
-**What else do you need?**
-- an Ethernet cable
-- a LAN network connection with DHCP
-- a network connected computer with perferrable Ubuntu, Windows could do the trick too...
-- a power cable
-
-# Step 1: Connect the Ai-Blox programmer & Ethernet
+## Step 1: Connect the Ai-Blox programmer & Ethernet
 
 Before powering on the Blox, the programmer needs to be connected. The connection pads on the PCB can be found underneath the communication module.
 
-## Remove the red cover of the communication module
+### Remove the red cover of the communication module
 
 For removing the communication module cover, you need to unscrew the 2 screws as showed below with an alley key.
 ![Blox-Device](/assets/images/pages/getting-started/Blox-device-screws.png)
 
 If there is a WiFi or LTE modem mounted, you will have to unscrew this also and takeout the modem module. 
 
-## Connect the Programmer
+### Connect the Programmer
 
 On the black board is a 5x2 pad configuration, which is the connector for the programmer tag connector. There are 3 small holes, 1 above and 2 below that mark the orientation of the connector. The tag connector has metalic colored pins that need to fit in these 3 holes. Make sure to hold it in the right orentation. 
 When placed correctly, give it a soft push, the metalic pins will sink into the board and the golden pins need to touch the pads. To make sure, you will need to an elastic band over keep the golden pins puhsed down to the pads.  
@@ -49,7 +36,7 @@ Blox programmer connector is kept in place with an elastic band.
 
 Now you also need to connect the programmer USB-A to USB-B connector to your computer. 
 
-## Connect the Ethernet Cable
+### Connect the Ethernet Cable
 
 To gain an IP address, connect an Ethernet cable to the RJ45 of the communcation module.
 
@@ -57,11 +44,11 @@ To gain an IP address, connect an Ethernet cable to the RJ45 of the communcation
 
 *If your blox device has the CB-0310 (4 PoE Ethernet) green communication module, note that these are not configured by default to receive a dynamic IP address. Do not use these ports to conenct to your network.*
 
-# Step 2: Setup the serial connection
+## Step 2: Setup the serial connection
 
 The Blox Programmer device contains a USB to Serial Port Bridge and can be used to connect to the serial console of the Blox platform. 
 
-## Ubuntu
+### Ubuntu
 
 Connect the programmer's USB cable to your computer. Connect the tag connector the Blox. 
 
@@ -87,7 +74,7 @@ $ sudo screen /dev/ttyUSB0 115200
 ```
 The console screen will be cleared. 
 
-## Windows
+### Windows
 
 To use the USB to UART Bridge of the programmer on Windows, the Silicon Labs CP2010x Universal Driver needs to be installed.
 
@@ -122,7 +109,7 @@ Select the COMx as displayed in the Device Manager and set the Speed to 115200.
 
 Click on open to start the serial connection. 
 
-# Step 3: Power on
+## Step 3: Power on
 
 Now the serial port is opened, plug in the Power supply connector.  
 
@@ -159,7 +146,7 @@ To see these additional updates run: apt list --upgradable
 ai-blox@tegra-ubuntu:~$
 ```
 
-# Step 4: Find the IP address
+## Step 4: Find the IP address
 
 To find the IP address use the `ifconfig | grep inet` in the serial console.
 The IP address will appear on the second line of the output of the command.
@@ -170,7 +157,7 @@ ai-blox@tegra-ubuntu:~$ ifconfig | grep inet
 
 ```
 
-# Step 5: Connect through SSH
+## Step 5: Connect through SSH
 
 Now the IP address is known, we can connect on the network over SSH. 
 
@@ -195,14 +182,14 @@ If you click on Putty you can start a new SSH session
 
 Login with username: `ai-blox` and password `ai-blox`.
 
-# Step 6: Connect with a VNC client
+## Step 6: Connect with a VNC client
 
 A VNC server is also enabled on the Blox device and can be used to connect with a VNC client. 
 On Ubuntu you could use the `Remote Desktop Viewer` ([Vinagre](https://help.ubuntu.com/community/Vinagre)) which is installed by defalt. Windows users could install and use (RemoteRipple)[https://remoteripple.com/] or any other availbel VNC client. 
 
 To use the VNC client, use the known IP address, login: `ai-blox` and password `ai-blox`
 
-# Recommendations
+## Recommendations
 
 To enhance security you will need to change the default password as a minimum. If you have changed the password, make sure that you have stored it somewhere to retrieve it later on. 
 
@@ -214,3 +201,21 @@ Enter new UNIX password:
 Retype new UNIX password:
 passwd: password updated successfully
 ```
+
+## How to find you Blox's IP address on your LAN network
+
+To identify your Blox's IP address on your LAN network, you could use nmp (networkmapper) or the arp protocol. 
+
+**Ubuntu**
+```bash
+$ sudo nmap -sn 192.168.1.0/24
+```
+The Blox will be represented as `tegra-ubuntu`
+
+
+**Windows**
+```bash
+> arp -a
+```
+
+<a href="/pages/getting-started/configuring-ip-camera-on-IB0310.html" class="button">Configure IB-03x0 for IP Cameras</a>
