@@ -1,9 +1,9 @@
 ---
 layout: default
 title: JetPack Support 
-parent: Kernel Support
+parent: Kernel
 grand_parent: BLOX
-nav_order: 1
+nav_order: 3
 ---
 
 # JetPack support overview
