@@ -3,7 +3,7 @@ layout: default
 title: How to install a SIM card
 parent: How to
 nav_order: 2
-has_children: true
+has_children: false
 has_toc: false
 ---
 
