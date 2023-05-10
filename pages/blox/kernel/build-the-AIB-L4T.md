@@ -25,7 +25,7 @@ $ git submodule update
 
 ## Checkout right version
 
-You can find the different version in the [README.md](http://README.md) file:
+You can find the different version in the [README.md](https://github.com/ai-blox/aib-l4t) file:
 
 ```bash
 $ git submodule foreach 'git checkout aib-l4t-r32.7.1'

@@ -25,7 +25,7 @@ Will guide you to get up and running with you blox device by connecting it to yo
 
 Explain you the further steps to be able to develop your application
 
-[BLOX](/pages/blox/index.md)
+[BLOX](/pages/blox/index.html)
 
 Overview of the Blox hardware and kernel support. 
 
@@ -33,7 +33,7 @@ Overview of the Blox hardware and kernel support.
 
 Overview of all available interface modules and their configuration
 
-[Comm Modules](/pages/interface-modules/comm-module.html)
+[Comm Modules](/pages/comm-modules/comm-modules.html)
 
 Overview of all available communication modules and their configuration
 
