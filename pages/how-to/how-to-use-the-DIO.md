@@ -7,7 +7,7 @@ has_children: false
 has_toc: false
 ---
 
-# How to connect the IB-0x10 digital input and outputs
+# How to connect the IB-0x10 digital inputs and outputs
 
 The interface modules IB-0210 and IB-0310 implement 4 Digital Inputs and 4 Digital Outputs. The I/O can be used to interface with standard input and output components like switches and relays or other systems with I/O capabilities like PLCs. The sections below explain the I/O capabilites and a basic example on how to use the I/Os.
 
